@@ -7,10 +7,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CannonBallComponent : MonoBehaviour
 {
+
+    public SpriteRenderer BallRenderer
+    {
+        get
+        {
+            return ballRenderer;
+        }
+    }
+
+    private SpriteRenderer ballRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ballRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

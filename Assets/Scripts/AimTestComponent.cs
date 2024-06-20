@@ -19,18 +19,21 @@ public class AimTestComponent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
+            cannon.StartLoading();
             cannon.CurrentTilt = 0;
-            cannon.FireCannon(null);
+            cannon.FireCannon();
         }
         else if (Input.GetKeyDown(KeyCode.Keypad1))
         {
+            cannon.StartLoading();
             cannon.CurrentTilt = 1;
-            cannon.FireCannon(null);
+            cannon.FireCannon();
         }
         else if (Input.GetKeyDown(KeyCode.Keypad2))
         {
+            cannon.StartLoading();
             cannon.CurrentTilt = 2;
-            cannon.FireCannon(null);
+            cannon.FireCannon();
         }
     }
 }

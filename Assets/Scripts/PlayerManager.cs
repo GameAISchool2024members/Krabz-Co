@@ -35,13 +35,14 @@ public class PlayerManager : MonoBehaviour
     public float rightHandToShoulderDistance;
 
     public float baseline_shoulder_midpoint;
-    private bool baselineSet = false;
+    public bool baselineSet_MidShoulders = false;
 
     [Header("Calculated Thresholds")]
     public float Threshold_Landmark_ShouldersZ;
-    public float Threshold_ShouldersToHandsY;
+    public bool Threshold_Landmark_MidShoulder = false;
 
-
+    public float distanceThreshold;
+    public float baselineDistance;
     void Start()
     {
         // Initialize the locked Y and Z values if not set in the Inspector
@@ -90,32 +91,46 @@ public class PlayerManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton0))
                 {
                     baseline_shoulder_midpoint = shoulderMidpoint.z;
-
-                    baselineSet = true;
+                    baselineDistance = Mathf.Abs(baseline_shoulder_midpoint - currentPosition.z);
+                    distanceThreshold = baselineDistance * 0.9f;
+                    baselineSet_MidShoulders = true;
                     Debug.Log("Baseline set to: " + baseline_shoulder_midpoint);
 
                     leftHandToShoulderDistance_baseline = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
                     rightHandToShoulderDistance_baseline = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
-
-                    if (baseline_shoulder_midpoint > 0)
-                        Threshold_Landmark_ShouldersZ = shoulderMidpoint.z - baseline_shoulder_midpoint * 0.2f;
-                    else
-                        Threshold_Landmark_ShouldersZ = shoulderMidpoint.z + baseline_shoulder_midpoint * 0.2f;
+                    
                 }
 
-                // Check for crouch condition
-                if (baselineSet && shoulderMidpoint.y < Threshold_Landmark_ShouldersZ && leftHandToShoulderDistance_baseline * .5 > leftHandToShoulderDistance
-                    && rightHandToShoulderDistance_baseline * .5 > rightHandToShoulderDistance)
+
+                // Calculate the current distance from the baseline
+                if (baselineSet_MidShoulders)
                 {
-                    Debug.Log("Threshold");
-                    Cannon.transform.rotation = Quaternion.Euler(140, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
-                }
-                else
-                    Cannon.transform.rotation = Quaternion.Euler(90, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
+                    float currentDistance = Mathf.Abs(shoulderMidpoint.z - Player.position.z);
+                    //// Calculate distances between hands and shoulders
+                    leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
+                    rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
 
-                // Calculate distances between hands and shoulders
-                leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
-                rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
+                    if (currentDistance > distanceThreshold && shoulderMidpoint.z < Threshold_Landmark_ShouldersZ && leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance
+                    && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
+                    {
+                        // Logic to handle when the distance exceeds the threshold
+                        Debug.Log("Shoulder movement exceeds threshold");
+                        Threshold_Landmark_MidShoulder = true;
+                        Cannon.transform.localRotation = Quaternion.Euler(50, Cannon.transform.localRotation.eulerAngles.y, 
+                            Cannon.transform.localRotation.eulerAngles.z);
+                        
+                    }
+                    else
+                    {
+                        Threshold_Landmark_MidShoulder = false;
+                        Cannon.transform.localRotation = Quaternion.Euler(0, Cannon.transform.localRotation.eulerAngles.y, 
+                            Cannon.transform.localRotation.eulerAngles.z);
+                        
+                    }
+                }
+                
+
+                
 
             }
 

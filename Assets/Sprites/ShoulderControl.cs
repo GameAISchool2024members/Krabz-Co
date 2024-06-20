@@ -1,8 +1,9 @@
-using UnityEngine;
-using Mediapipe.Unity; // Add this using directive
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using Mediapipe.Unity;
 
-public class HipControl : MonoBehaviour
+public class ShoulderControl : MonoBehaviour
 {
     // Reference to the cube you want to move
     public Transform cube;
@@ -11,25 +12,34 @@ public class HipControl : MonoBehaviour
     public float lockedY;
     public float lockedZ;
 
+
+
     // Reference to the PoseLandmarkListAnnotation component
     public PoseLandmarkListAnnotation poseLandmarkListAnnotation;
 
     // Scaling factor to reduce movement range
     public float scalingFactor = 0.1f;
     public float Y_Landmark;
-    public float Threshold_Landmark;
-    
-    // Offsets to adjust the hip position if needed
+    public float Threshold_Landmark_ShouldersY;
+    public float Threshold_ShouldersToHandsY;
+    public GameObject Cannon;
+    // Offsets to adjust the shoulder position if needed
     public Vector3 positionOffset;
-
-    private const int leftHipIndex = 23;
-    private const int rightHipIndex = 24;
-
 
     private const int leftShoulderIndex = 11;
     private const int rightShoulderIndex = 12;
-    // Baseline y position of the left hip
-    public float baselineY;
+    private const int leftHandIndex = 15;
+    private const int rightHandIndex = 16;
+
+    //Baselines
+    public float leftHandToShoulderDistance_baseline;
+    public float rightHandToShoulderDistance_baseline;
+
+    public float leftHandToShoulderDistance;
+    public float rightHandToShoulderDistance;
+
+    // Baseline y position of the left shoulder
+    public float baseline_shoulder_midpoint;
     private bool baselineSet = false;
 
     // List of cube prefabs for random instantiation
@@ -52,27 +62,27 @@ public class HipControl : MonoBehaviour
         if (poseLandmarkListAnnotation != null)
         {
             // Get the landmarks
-            var leftHip = poseLandmarkListAnnotation[leftHipIndex];
-            var rightHip = poseLandmarkListAnnotation[rightHipIndex];
-
             var leftShoulder = poseLandmarkListAnnotation[leftShoulderIndex];
             var rightShoulder = poseLandmarkListAnnotation[rightShoulderIndex];
-            if (leftHip != null && rightHip != null)
+
+            var leftHand = poseLandmarkListAnnotation[leftHandIndex];
+            var rightHand = poseLandmarkListAnnotation[rightHandIndex];
+
+            if (leftShoulder != null && rightShoulder != null && leftHand != null && rightHand != null)
             {
-                // Use left hip for positioning (can be averaged with right hip if needed)
-                Vector3 hipPosition = new Vector3(leftShoulder.transform.position.x, leftShoulder.transform.position.y, leftShoulder.transform.position.z);
-                Y_Landmark = leftShoulder.transform.position.y;
+                // Calculate the midpoint between the shoulders
+                Vector3 shoulderMidpoint = (leftShoulder.transform.position + rightShoulder.transform.position) / 2.0f;
 
                 // Scale down the movement
-                hipPosition *= scalingFactor;
+                shoulderMidpoint *= scalingFactor;
 
                 // Apply offset if needed
-                hipPosition += positionOffset;
-
-                // Update the X position to match the hip's X position
+                shoulderMidpoint += positionOffset;
+                
+                // Update the X position to match the shoulder midpoint X position
                 Vector3 currentPosition = cube.position;
-                currentPosition.x = hipPosition.x;
-
+                currentPosition.x = -shoulderMidpoint.x;
+                Y_Landmark = shoulderMidpoint.y;
                 // Keep the Y and Z positions locked
                 currentPosition.y = lockedY;
                 currentPosition.z = lockedZ;
@@ -86,21 +96,37 @@ public class HipControl : MonoBehaviour
                 // Check for baseline setting
                 if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton0))
                 {
-                    baselineY = leftShoulder.transform.position.y;
+                    baseline_shoulder_midpoint = shoulderMidpoint.y;
+      
                     baselineSet = true;
-                    Debug.Log("Baseline set to: " + baselineY);
-                    if(baselineY>0)
-                        Threshold_Landmark = leftShoulder.transform.position.y - baselineY * 0.8f * 10;
+                    Debug.Log("Baseline set to: " + baseline_shoulder_midpoint);
+
+                    leftHandToShoulderDistance_baseline= Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
+                    rightHandToShoulderDistance_baseline= Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
+
+                    if (baseline_shoulder_midpoint > 0)
+                        Threshold_Landmark_ShouldersY = shoulderMidpoint.y - baseline_shoulder_midpoint * 0.2f;
                     else
-                        Threshold_Landmark = leftShoulder.transform.position.y + baselineY * 0.8f * 10;
+                        Threshold_Landmark_ShouldersY = shoulderMidpoint.y + baseline_shoulder_midpoint * 0.2f;
                 }
 
                 // Check for crouch condition
-                if (baselineSet && leftShoulder.transform.position.y < Threshold_Landmark)
+                if (baselineSet && shoulderMidpoint.y < Threshold_Landmark_ShouldersY && leftHandToShoulderDistance_baseline * .5 >  leftHandToShoulderDistance  
+                    &&  rightHandToShoulderDistance_baseline * .5 > rightHandToShoulderDistance)
                 {
                     SpawnRandomCube();
+                    Cannon.transform.rotation = Quaternion.Euler(50, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
                 }
+                else
+                    Cannon.transform.rotation = Quaternion.Euler(0, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
+
+                // Calculate distances between hands and shoulders
+                leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
+                rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
+
             }
+
+
         }
     }
 
@@ -127,6 +153,7 @@ public class HipControl : MonoBehaviour
         Debug.Log("Threshold");
         if (cubePrefabs.Count > 0)
         {
+            
             Vector3 randomPosition = new Vector3(
                 Random.Range(cubeSpawnMin.x, cubeSpawnMax.x),
                 Random.Range(cubeSpawnMin.y, cubeSpawnMax.y),

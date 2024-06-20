@@ -2060,6 +2060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426146485}
   - component: {fileID: 1426146484}
+  - component: {fileID: 1426146486}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2100,6 +2101,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426146486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426146483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77ce69dbf3f7dc4499fbc2252d88710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numCrabsSpawn: 9
+  numRabbitsSpawn: 0
+  xFloorSplits: 3
+  zAxisRows:
+  - 5
+  - 7
+  - 9
+  crabPrefab: {fileID: 7222859223487158650, guid: 837ceb8396c2b194f9f1ae204c27f666, type: 3}
+  rabbitPrefab: {fileID: 0}
+  floor: {fileID: 1720804771}
+  floorStartX: -3.3
+  floorEndX: 3.5
 --- !u!1001 &1514445398
 PrefabInstance:
   m_ObjectHideFlags: 0

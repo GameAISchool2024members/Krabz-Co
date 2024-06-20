@@ -73,6 +73,12 @@ public class AimingComponent : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if(attachedObject == null || attachedObject.Transform == null)
+        {
+            return;
+        }
+
         trajectoryTime += Time.fixedDeltaTime * initialVelocity;
 
         Spline spline = splines[attachedObject.TrajectoryIndex];
@@ -88,10 +94,10 @@ public class AimingComponent : MonoBehaviour
         midPoint.y += spline.height;
 
         attachedObject.Transform.position = GetPoint(startPosition, midPoint, endPosition, trajectoryTime);
-
         if((attachedObject.Transform.position - endPosition).sqrMagnitude < 0.25f)
         {
             attachedObject.Transform.position = endPosition;
+            attachedObject.Transform.gameObject.SendMessage("DestroyCannonBall");
             attachedObject = null;
             enabled = false;
         }

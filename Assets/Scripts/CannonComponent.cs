@@ -15,7 +15,7 @@ public class CannonComponent : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject cannonPrefab;
+    private CannonBallComponent cannonPrefab;
 
     private AimingComponent aimingComponent;
 
@@ -29,7 +29,7 @@ public class CannonComponent : MonoBehaviour
 
     public void FireCannon(Texture2D texture)
     {
-        GameObject cannonBall = Instantiate(cannonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject cannonBall = Instantiate(cannonPrefab.gameObject, new Vector3(0, 0, 0), Quaternion.identity);
         aimingComponent.AttachObject(new AimingComponent.AttachableObject(cannonBall, currentTilt));
     }
 }

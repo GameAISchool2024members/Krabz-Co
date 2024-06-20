@@ -82,7 +82,7 @@ public class ShoulderControl : MonoBehaviour
                 // Update the X position to match the shoulder midpoint X position
                 Vector3 currentPosition = cube.position;
                 currentPosition.x = -shoulderMidpoint.x;
-                Y_Landmark = shoulderMidpoint.y;
+                Y_Landmark = shoulderMidpoint.z;
                 // Keep the Y and Z positions locked
                 currentPosition.y = lockedY;
                 currentPosition.z = lockedZ;
@@ -96,7 +96,7 @@ public class ShoulderControl : MonoBehaviour
                 // Check for baseline setting
                 if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton0))
                 {
-                    baseline_shoulder_midpoint = shoulderMidpoint.y;
+                    baseline_shoulder_midpoint = shoulderMidpoint.z;
       
                     baselineSet = true;
                     Debug.Log("Baseline set to: " + baseline_shoulder_midpoint);
@@ -105,9 +105,9 @@ public class ShoulderControl : MonoBehaviour
                     rightHandToShoulderDistance_baseline= Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
 
                     if (baseline_shoulder_midpoint > 0)
-                        Threshold_Landmark_ShouldersY = shoulderMidpoint.y - baseline_shoulder_midpoint * 0.2f;
+                        Threshold_Landmark_ShouldersY = shoulderMidpoint.z - baseline_shoulder_midpoint * 0.2f;
                     else
-                        Threshold_Landmark_ShouldersY = shoulderMidpoint.y + baseline_shoulder_midpoint * 0.2f;
+                        Threshold_Landmark_ShouldersY = shoulderMidpoint.z + baseline_shoulder_midpoint * 0.2f;
                 }
 
                 // Check for crouch condition
@@ -115,10 +115,10 @@ public class ShoulderControl : MonoBehaviour
                     &&  rightHandToShoulderDistance_baseline * .5 > rightHandToShoulderDistance)
                 {
                     SpawnRandomCube();
-                    Cannon.transform.rotation = Quaternion.Euler(50, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
+                    Cannon.transform.rotation = Quaternion.Euler(140, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
                 }
                 else
-                    Cannon.transform.rotation = Quaternion.Euler(0, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
+                    Cannon.transform.rotation = Quaternion.Euler(90, Cannon.transform.rotation.eulerAngles.y, Cannon.transform.rotation.eulerAngles.z);
 
                 // Calculate distances between hands and shoulders
                 leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);

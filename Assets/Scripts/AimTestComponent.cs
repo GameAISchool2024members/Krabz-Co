@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CannonComponent))]
 public class AimTestComponent : MonoBehaviour
 {
-    public AimingComponent aiming;
 
-    public GameObject test;
+    private CannonComponent cannon;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        cannon = GetComponent<CannonComponent>();
     }
 
     // Update is called once per frame
@@ -19,18 +19,18 @@ public class AimTestComponent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
-            test.transform.localScale = new Vector3(1, 1, 1);
-            aiming.AttachObject(new AimingComponent.AttachableObject(test, 0));
+            cannon.CurrentTilt = 0;
+            cannon.FireCannon(null);
         }
         else if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            test.transform.localScale = new Vector3(1, 1, 1);
-            aiming.AttachObject(new AimingComponent.AttachableObject(test, 1));
+            cannon.CurrentTilt = 1;
+            cannon.FireCannon(null);
         }
         else if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            test.transform.localScale = new Vector3(1, 1, 1);
-            aiming.AttachObject(new AimingComponent.AttachableObject(test, 2));
+            cannon.CurrentTilt = 2;
+            cannon.FireCannon(null);
         }
     }
 }

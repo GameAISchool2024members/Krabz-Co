@@ -29,8 +29,8 @@ public class AudioCapturing : MonoBehaviour
 
     private void StartRecording()
     {
-        CapturingInProgress = true;
         StartCoroutine(CaptureAudio());
+        CapturingInProgress = true;
     }
     
     private IEnumerator CaptureAudio()

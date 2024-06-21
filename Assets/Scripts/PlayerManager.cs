@@ -109,15 +109,23 @@ public class PlayerManager : MonoBehaviour
                     leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
                     rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
    
-                    if (baseline_shoulder_midpoint -shoulderMidpoint.z > Threshold_Landmark_ShouldersZ && 
+                    if (baseline_shoulder_midpoint - shoulderMidpoint.z > Threshold_Landmark_ShouldersZ && 
                         leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
                     {
 
                             // Logic to handle when the distance exceeds the threshold
                             Debug.Log("Shoulder movement exceeds threshold");
                             Threshold_Landmark_MidShoulder = true;
-                            Cannon.transform.localRotation = Quaternion.Euler(50, Cannon.transform.localRotation.eulerAngles.y,
+                            Cannon.transform.localRotation = Quaternion.Euler(25, Cannon.transform.localRotation.eulerAngles.y,
                                 Cannon.transform.localRotation.eulerAngles.z);
+                    }
+                    else if(baseline_shoulder_midpoint - shoulderMidpoint.z <= Threshold_Landmark_ShouldersZ &&
+                        leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
+                    {
+                        Debug.Log("Hands above shoulders");
+                        Threshold_Landmark_MidShoulder = true;
+                        Cannon.transform.localRotation = Quaternion.Euler(-25, Cannon.transform.localRotation.eulerAngles.y,
+                            Cannon.transform.localRotation.eulerAngles.z);
                     }
                     else
                     {

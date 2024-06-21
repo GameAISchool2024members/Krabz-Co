@@ -9,21 +9,27 @@ using UnityEngine.Networking;
 public class Leonardo : MonoBehaviour
 {
     private string url = "http://localhost:8008/get_image";
+    private string audioUrl = "http://localhost:8008/transcribe";
     // Start is called before the first frame update
     public void RequestImage(string prompt, IImageReceiver imageReceiver)
     {
         StartCoroutine(GenerateImage(prompt, imageReceiver));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RequestAudioDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
     {
-        
+        StartCoroutine(GenerateDescription(path, descriptionReceiver));
     }
 
     public interface IImageReceiver
     {
         void SetImage(Sprite sprite);
+
+    }
+
+    public interface IAudioDescriptionReceiver
+    {
+        void SetDescription(string description);
 
     }
 
@@ -73,4 +79,37 @@ public class Leonardo : MonoBehaviour
         }
     }
 
+
+    public IEnumerator GenerateDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
+    {
+        string processed_prompt = "{\"file\": \"" + path + "\"}";
+
+        Debug.Log(processed_prompt);
+        // Create a new UnityWebRequest for a POST request
+        UnityWebRequest request = new UnityWebRequest(audioUrl, "POST");
+
+        // Set the request headers
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Convert prompt to a byte array
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(processed_prompt);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+
+        // Create a DownloadHandler to receive the response
+        request.downloadHandler = new DownloadHandlerBuffer();
+
+        // Send the request and wait for a response
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+        else
+        {
+            Debug.Log("Response: " + request.downloadHandler.text);
+
+            descriptionReceiver.SetDescription(request.downloadHandler.text);
+        }
+    }
 }

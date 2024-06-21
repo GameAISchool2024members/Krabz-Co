@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.78, z: 5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,13 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac295024bccfcfe4b8e572d35c062bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
+  baseSpeed: 3
   moveSpeedRange: 1
-  constrainerStart: -10
-  constrainerEnd: 10
-  zAxisRows: []
-  currentZIndex: 0
-  zMovementSpeed: 1
+  constrainerStart: -12
+  constrainerEnd: 12
 --- !u!65 &3051412506930293877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,8 +123,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.43, y: 0.58, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!114 &3911289965766886445
 MonoBehaviour:
   m_ObjectHideFlags: 0

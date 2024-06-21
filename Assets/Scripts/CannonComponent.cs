@@ -62,7 +62,7 @@ public class CannonComponent : MonoBehaviour
         }
 
         CannonBallComponent cannonBall = Instantiate<CannonBallComponent>(cannonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        aimingComponent.AttachObject(new AimingComponent.AttachableObject(cannonBall.gameObject, currentTilt));
+        cannonBall.SplineData = aimingComponent.getSplineData(currentTilt);
         cannonBall.gameObject.transform.localScale *= ballTexture ? 1f : 0.5f;
         cannonBall.BallRenderer.sprite = ballTexture ? ballTexture : defaultImage;
 

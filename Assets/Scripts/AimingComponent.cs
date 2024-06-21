@@ -23,19 +23,22 @@ public class AimingComponent : MonoBehaviour
         public float height;
     }
 
-    public class AttachableObject
+    public class SplineData
     {
-        public AttachableObject(GameObject obj, int index)
+        public SplineData(Vector3 newStartPosition, Vector3 newMidPosition, Vector3 newEndPosition, float newInitialVelocity)
         {
-            Transform = obj.transform;
-            TrajectoryIndex = index;
+            startPosition = newStartPosition;
+            midPosition = newMidPosition;
+            endPosition = newEndPosition;
+
+            initialVelocity = newInitialVelocity;
         }
 
-        public Transform Transform { get; set; } = null;
+        public Vector3 startPosition;
+        public Vector3 midPosition;
+        public Vector3 endPosition;
 
-        
-
-        public int TrajectoryIndex { get; set; } = 0;
+        public float initialVelocity;
     }
 
     [SerializeField]
@@ -45,9 +48,6 @@ public class AimingComponent : MonoBehaviour
     [MinAttribute(0.0001f)]
     float initialVelocity = 0.0001f;
 
-    protected AttachableObject attachedObject = null;
-
-    private float trajectoryTime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -55,33 +55,14 @@ public class AimingComponent : MonoBehaviour
         enabled = false;
     }
 
-    public void AttachObject(AttachableObject newObject)
+    public SplineData getSplineData(int trajectoryIndex)
     {
-        if(newObject.TrajectoryIndex < 0 || newObject.TrajectoryIndex >= splines.Count)
+        if (trajectoryIndex < 0 || trajectoryIndex >= splines.Count)
         {
             throw new Exception("Invalid Trajectory Index");
         }
 
-        Vector3 position = transform.position;
-        position.y += splines[newObject.TrajectoryIndex].startPoint;
-
-        attachedObject = newObject;
-        attachedObject.Transform.position = position;
-        trajectoryTime = 0f;
-        enabled = true;
-    }
-
-    void FixedUpdate()
-    {
-
-        if(attachedObject == null || attachedObject.Transform == null)
-        {
-            return;
-        }
-
-        trajectoryTime += Time.fixedDeltaTime * initialVelocity;
-
-        Spline spline = splines[attachedObject.TrajectoryIndex];
+        Spline spline = splines[trajectoryIndex];
 
         Vector3 startPosition = transform.position;
         startPosition.y += spline.startPoint;
@@ -93,14 +74,7 @@ public class AimingComponent : MonoBehaviour
         Vector3 midPoint = (startPosition + endPosition) / 2;
         midPoint.y += spline.height;
 
-        attachedObject.Transform.position = GetPoint(startPosition, midPoint, endPosition, trajectoryTime);
-        if((attachedObject.Transform.position - endPosition).sqrMagnitude < 0.25f)
-        {
-            attachedObject.Transform.position = endPosition;
-            attachedObject.Transform.gameObject.SendMessage("DestroyCannonBall");
-            attachedObject = null;
-            enabled = false;
-        }
+        return new SplineData(startPosition, midPoint, endPosition, initialVelocity);
     }
 
     void OnDrawGizmosSelected()
@@ -131,7 +105,7 @@ public class AimingComponent : MonoBehaviour
         }
     }
 
-    public Vector3 GetPoint(Vector3 P0, Vector3 P1, Vector3 P2, float T)
+    static public Vector3 GetPoint(Vector3 P0, Vector3 P1, Vector3 P2, float T)
     {
         return (1 - T) * (1 - T) * P0 + 2 * (1 - T) * T * P1 + T * T * P2;
     }

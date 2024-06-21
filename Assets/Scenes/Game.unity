@@ -945,7 +945,7 @@ MonoBehaviour:
     endPoint: {x: 8, y: -4}
     height: 3.52
   - scaleSpeed: 0
-    startPoint: 2.7
+    startPoint: 1.7
     endPoint: {x: 13.5, y: -4}
     height: 4.74
   - scaleSpeed: 0

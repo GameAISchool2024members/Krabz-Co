@@ -65,6 +65,11 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.Space))
+        {
+            Cannon.StartLoading();
+            Cannon.FireCannon();
+        }
         // Ensure that pose landmarks are available
         if (poseLandmarkListAnnotation != null)
         {

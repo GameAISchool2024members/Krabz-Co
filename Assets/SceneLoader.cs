@@ -5,6 +5,11 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadGameScene()
     {
+        SceneManager.LoadScene("Instructions");
+    }
+
+    public void LoadCalibrationsScene()
+    {
         SceneManager.LoadScene("Calibration");
     }
 
@@ -12,6 +17,12 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("HowTo");
     }
+
+    public void LoadMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     public void Exit()
     {
         Application.Quit();

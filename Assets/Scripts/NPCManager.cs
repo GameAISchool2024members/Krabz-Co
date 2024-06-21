@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCManager : MonoBehaviour
 {
-    // Total number of crabs and rabbits to spawn
+    // Total number of crabs and seagulls to spawn
     public int numCrabsSpawnLine;
     public int numSeagullsSpawnLine;
 
@@ -35,6 +36,38 @@ public class NPCManager : MonoBehaviour
         crabs = new List<GameObject>();
         seagulls = new List<GameObject>();
         GenerateNPCs();
+    }
+
+    private void checkIfNPCsAreAlive()
+    {
+        // Check if any crabs are alive
+        for (int i = 0; i < crabs.Count; i++)
+        {
+            if (crabs[i] == null)
+            {
+                crabs.RemoveAt(i);
+                i--;
+            }
+        }
+
+        // Check if any seagulls are alive
+        for (int i = 0; i < seagulls.Count; i++)
+        {
+            if (seagulls[i] == null)
+            {
+                seagulls.RemoveAt(i);
+                i--;
+            }
+        }
+
+        // If there are no crabs or seagulls left, print yay
+        if (crabs.Count == 0 && seagulls.Count == 0)
+        {
+            Debug.Log("Yay! No more NPCs left!");
+            // Move to next scene
+             SceneManager.LoadScene("MainMenu");
+        }
+        
     }
 
     private void GenerateNPCs()
@@ -115,6 +148,6 @@ public class NPCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        checkIfNPCsAreAlive();
     }
 }

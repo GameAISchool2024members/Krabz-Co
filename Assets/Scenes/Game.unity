@@ -1208,7 +1208,6 @@ GameObject:
   - component: {fileID: 698187891}
   - component: {fileID: 698187894}
   - component: {fileID: 698187893}
-  - component: {fileID: 698187892}
   - component: {fileID: 698187896}
   m_Layer: 0
   m_Name: Cannon
@@ -1234,18 +1233,6 @@ Transform:
   - {fileID: 2090232544}
   m_Father: {fileID: 1980009636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &698187892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698187890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 849e814c605ac774f9e028288cf24da9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &698187893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,7 +1246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 3370064976983512019, guid: 8915e1b283a57094584c92b21e187bd1, type: 3}
-  defaultImage: {fileID: 21300000, guid: ddd0ca2be35f5cb469af01a50e72e28e, type: 3}
+  defaultImage: {fileID: 21300000, guid: 516158850658e324c85902d8899bba8a, type: 3}
   ballPreview: {fileID: 643088667}
   cannonSprite: {fileID: 2090232545}
 --- !u!114 &698187894
@@ -2583,8 +2570,7 @@ GameObject:
   - component: {fileID: 1426146486}
   - component: {fileID: 1426146487}
   - component: {fileID: 1426146488}
-  - component: {fileID: 1426146489}
-  - component: {fileID: 1426146490}
+  - component: {fileID: 1426146491}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2676,7 +2662,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePhase: 3
---- !u!114 &1426146489
+  cannon: {fileID: 698187893}
+--- !u!114 &1426146491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2685,78 +2672,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1426146483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a50e3140c3ecaaf1c848dbf141cc2074, type: 3}
+  m_Script: {fileID: 11500000, guid: afda625e2ead4494ea0a82ff152cc711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  advancedOptions: 0
-  expertOptions: 0
-  host: localhost
-  port: 13333
-  stream: 1
-  grammar: 
-  seed: 0
-  numPredict: 256
-  cachePrompt: 1
-  temperature: 0.2
-  topK: 40
-  topP: 0.9
-  minP: 0.05
-  repeatPenalty: 1.1
-  presencePenalty: 0
-  frequencyPenalty: 0
-  tfsZ: 1
-  typicalP: 1
-  repeatLastN: 64
-  penalizeNl: 1
-  penaltyPrompt: 
-  mirostat: 0
-  mirostatTau: 5
-  mirostatEta: 0.1
-  nProbs: 0
-  ignoreEos: 0
-  nKeep: -1
-  stop: []
-  playerName: user
-  AIName: assistant
-  prompt: "I want you to rate the provided object based on its funiness and semantic
-    distance from the word cannonball (the further, the higher the score). The scale
-    is 0 to 10. You provide a combined rating.\r\n If the object does not fit inside
-    of a cannon, return a score of 0. Finally, the explanation should only be one
-    sentence and should he humorous. Like a stand-up comedian is making the evaluation.\r\n\r\nYour
-    output should look like this:\r\n\"score,explanation\"\r\n\r\nFor example, for
-    input \"Rubber Duck\", a valid answer is\r\n\"6,A rubber duck is quite funny
-    due to its playful nature and the unexpectedness of using it as a cannonball\""
-  setNKeepToPrompt: 1
-  chatTemplate: mistral chat
-  grammarString: 
-  numThreads: -1
-  numGPULayers: 30
-  parallelPrompts: -1
-  debug: 0
-  asynchronousStartup: 0
-  remote: 0
-  killExistingServersOnStart: 1
-  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
-  lora: 
-  contextSize: 0
-  batchSize: 512
-  SelectedModel: 1
-  modelProgress: 1
-  modelCopyProgress: 1
-  modelHide: 1
---- !u!114 &1426146490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426146483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4691d1e01dd2e6646bc0be110dd63d58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  llm: {fileID: 1426146489}
 --- !u!1001 &1514445398
 PrefabInstance:
   m_ObjectHideFlags: 0

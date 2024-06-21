@@ -1,18 +1,20 @@
 using UnityEngine;
 
-public class GameProgression : MonoBehaviour
+public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
 {
     public GamePhases GamePhase ;
-
+    public CannonComponent cannon;
 
     void OnEnable()
     {
         EventManager.OnRecordingComplete += RecordingComplete;
+        EventManager.OnImageGenerated += ImageGenerated;
     }
 
     void OnDisable()
     {
-        EventManager.OnStartRecording -= RecordingComplete;
+        EventManager.OnRecordingComplete -= RecordingComplete;
+        EventManager.OnImageGenerated -= ImageGenerated;
     }
 
     void Update()
@@ -28,7 +30,7 @@ public class GameProgression : MonoBehaviour
                 break;
             case GamePhases.CannonBallChoosingInfo:
             {
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Joystick1Button0))
                 {
                     ChangeState(GamePhases.CannonballSpeaking);
                     EventManager.StartRecording();
@@ -59,11 +61,25 @@ public class GameProgression : MonoBehaviour
             
         } 
     }
-    
-    
-    private void RecordingComplete()
+
+    public void SetDescription(string newDescription)
     {
-        GamePhase = GamePhases.CannonballGeneration;
+        description = newDescription;
+        GetComponent<Leonardo>().RequestImage(description, cannon);
     }
 
+    private string description;
+    
+    private void RecordingComplete(string path)
+    {
+        GamePhase = GamePhases.CannonballGeneration;
+        GetComponent<Leonardo>().RequestAudioDescription(path, this);
+        
+    }
+
+
+    private void ImageGenerated()
+    {
+        ChangeState(GamePhases.CannonBallChoosingInfo);
+    }
 }

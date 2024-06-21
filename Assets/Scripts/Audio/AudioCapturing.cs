@@ -36,20 +36,20 @@ public class AudioCapturing : MonoBehaviour
     private IEnumerator CaptureAudio()
     {
         // Start recording from the microphone
-        audioSource.clip = Microphone.Start(null, false, 10, 44100);
+        audioSource.clip = Microphone.Start(null, false, 5, 44100);
         yield return new WaitForSeconds(5);
     }
 
     public void Update()
     {
-        if (CapturingInProgress && Input.GetKeyDown(KeyCode.D))
+        if (CapturingInProgress && !Microphone.IsRecording(null))
         {
             Microphone.End(null);
 
-            string filePath = Application.persistentDataPath + "/recording.wav";
+            string filePath = Application.dataPath + "/recording.wav";
             SavWav.Save(filePath, audioSource.clip);
             CapturingInProgress = false;
-            EventManager.CompleteRecording();
+            EventManager.CompleteRecording(filePath);
 
             // Send the audio file to the server for transcription
             //StartCoroutine(SendAudioToServer(filePath));

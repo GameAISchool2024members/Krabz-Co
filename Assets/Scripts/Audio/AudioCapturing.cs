@@ -42,7 +42,7 @@ public class AudioCapturing : MonoBehaviour
 
     public void Update()
     {
-        if (CapturingInProgress && Input.GetKeyDown(KeyCode.A))
+        if (CapturingInProgress && Input.GetKeyDown(KeyCode.D))
         {
             Microphone.End(null);
 

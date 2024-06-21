@@ -26,10 +26,12 @@ public class NPCManager : MonoBehaviour
     // Current crabs and rabbits
     private List<GameObject> crabs;
     private List<GameObject> seagulls;
-
+    public GameObject Explosion;
+    public static NPCManager Instance;
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         crabs = new List<GameObject>();
         seagulls = new List<GameObject>();
         GenerateNPCs();
@@ -95,6 +97,21 @@ public class NPCManager : MonoBehaviour
         }
     }
 
+    public void ExplosionOfNPC(Transform transform)
+    {
+        GameObject Explosion_=Instantiate(Explosion, transform.position, Quaternion.identity);
+        StartCoroutine(HandleExplosion(Explosion_));
+    }
+
+    private IEnumerator HandleExplosion(GameObject gameObject)
+    {
+       
+        // Wait for another 1 second
+        yield return new WaitForSeconds(2f);
+
+        // Destroy the explosion
+        Destroy(gameObject);
+    }
     // Update is called once per frame
     void Update()
     {

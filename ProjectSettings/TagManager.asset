@@ -48,3 +48,6 @@ TagManager:
   - name: Ball
     uniqueID: 4189608599
     locked: 0
+  - name: Cannon
+    uniqueID: 2251585251
+    locked: 0

@@ -35,7 +35,7 @@ public class CannonBallComponent : MonoBehaviour
     private AimingComponent.SplineData splineData = null;
 
     private float trajectoryTime = 0f;
-
+    public GameObject Explosion;
     // Start is called before the first frame update
     void Awake()
     {
@@ -64,9 +64,15 @@ public class CannonBallComponent : MonoBehaviour
 
     public void DestroyCannonBall()
     {
-        Destroy(gameObject);
-    }
+        
 
+        Destroy(gameObject);
+        NPCManager.Instance.ExplosionOfNPC(gameObject.transform);
+        // Start the coroutine to instantiate the explosion after a delay
+
+
+    }
+   
     public void OnTriggerEnter(Collider other)
     {
         DestroyCannonBall();

@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 Leonardo/*.log
 Leonardo/*.jpg
+
+*.gguf
+*.gguf.meta

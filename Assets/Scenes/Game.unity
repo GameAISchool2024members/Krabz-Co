@@ -2579,6 +2579,8 @@ GameObject:
   - component: {fileID: 1426146486}
   - component: {fileID: 1426146487}
   - component: {fileID: 1426146488}
+  - component: {fileID: 1426146489}
+  - component: {fileID: 1426146490}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2669,6 +2671,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePhase: 3
+--- !u!114 &1426146489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426146483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50e3140c3ecaaf1c848dbf141cc2074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  advancedOptions: 0
+  expertOptions: 0
+  host: localhost
+  port: 13333
+  stream: 1
+  grammar: 
+  seed: 0
+  numPredict: 256
+  cachePrompt: 1
+  temperature: 0.2
+  topK: 40
+  topP: 0.9
+  minP: 0.05
+  repeatPenalty: 1.1
+  presencePenalty: 0
+  frequencyPenalty: 0
+  tfsZ: 1
+  typicalP: 1
+  repeatLastN: 64
+  penalizeNl: 1
+  penaltyPrompt: 
+  mirostat: 0
+  mirostatTau: 5
+  mirostatEta: 0.1
+  nProbs: 0
+  ignoreEos: 0
+  nKeep: -1
+  stop: []
+  playerName: user
+  AIName: assistant
+  prompt: "I want you to rate the provided object based on its funiness and semantic
+    distance from the word cannonball (the further, the higher the score). The scale
+    is 0 to 10. You provide a combined rating.\r\n If the object does not fit inside
+    of a cannon, return a score of 0. Finally, the explanation should only be one
+    sentence and should he humorous. Like a stand-up comedian is making the evaluation.\r\n\r\nYour
+    output should look like this:\r\n\"score,explanation\"\r\n\r\nFor example, for
+    input \"Rubber Duck\", a valid answer is\r\n\"6,A rubber duck is quite funny
+    due to its playful nature and the unexpectedness of using it as a cannonball\""
+  setNKeepToPrompt: 1
+  chatTemplate: mistral chat
+  grammarString: 
+  numThreads: -1
+  numGPULayers: 30
+  parallelPrompts: -1
+  debug: 0
+  asynchronousStartup: 0
+  remote: 0
+  killExistingServersOnStart: 1
+  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
+  lora: 
+  contextSize: 0
+  batchSize: 512
+  SelectedModel: 1
+  modelProgress: 1
+  modelCopyProgress: 1
+  modelHide: 1
+--- !u!114 &1426146490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426146483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4691d1e01dd2e6646bc0be110dd63d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  llm: {fileID: 1426146489}
 --- !u!1001 &1514445398
 PrefabInstance:
   m_ObjectHideFlags: 0

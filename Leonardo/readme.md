@@ -27,7 +27,7 @@ Open the server running locally at `localhost:8008`:
 python api-test.py --api
 ```
 
-Only one open endpoint `/get_image` that takes JSON data as follows:
+Endpoint `/get_image` takes JSON data as follows, and returns the absolute path to the generated downloaded image:
 
 ```json
 {
@@ -41,7 +41,19 @@ cURL example:
 curl --request POST --url http://localhost:8008/get_image --header 'content-type: application/json' --data '{"prompt": "furry lobster"}'
 ```
 
-The response is the absolute path to the generated image.
+Endpoint `/transcribe` takes a single string which is a local path to the file to be transcribed (relative or absolute). Returns transcription text as a single string.
+
+```json
+{
+    "file": "recording.wav"
+}
+```
+
+cURL example:
+
+```bash
+curl --request POST --url http://localhost:8008/transcribe --header 'content-type: application/json' --data '{"file": "recording.wav"}'
+```
 
 Do not open the server, but generate and download a single image:
 

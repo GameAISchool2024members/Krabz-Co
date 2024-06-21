@@ -13,6 +13,11 @@ import re
 
 from flask import Flask, request, jsonify
 
+# import whisper
+# import soundfile as sf
+
+import speech_recognition as sr
+
 from profanities import profanities as obscene_words
 
 # %% data for the API calls
@@ -37,32 +42,18 @@ logging.basicConfig(
     ]
 )
 
-# %% flask socket app
+# %% flask app
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 
-# def start_tcp_server():
-#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     server_socket.bind(('0.0.0.0', 8010))
-#     server_socket.listen(5)
-#     print("TCP server listening on port 8010")
+# %% speech to text soundfile model
 
-#     while True:
-#         client_socket, addr = server_socket.accept()
-#         logging.info(f"Connection from {addr}")
-#         handle_client(client_socket)
+# model = whisper.load_model("small.en")
 
-# def handle_client(client_socket):
-#     with client_socket:
-#         while True:
-#             data = client_socket.recv(1024)
-#             if not data:
-#                 break
-#             data = data.decode('utf-8')
-#             logging.info(f"Received: {data}")
-#             response = generate_image(data)
-#             client_socket.sendall(response)
+# %% speech recogniser
+
+recogniser = sr.Recognizer()
 
 # %% profanity filter
 
@@ -257,12 +248,42 @@ def upload_init_image():
 def echo():
     data = request.json
     if 'prompt' in data:
-        image_path = generate_image(data['prompt'])
-        # return jsonify({'response': image_path})
+        try:
+            image_path = generate_image(data['prompt'])
+        except Exception as e:
+            logging.error(e)
+            raise e
         return image_path
-        # return jsonify(image_path)
     else:
         return jsonify({'error': 'No message found'}), 400
+
+@app.route("/transcribe", methods=["POST"])
+def transcribe():
+    data = request.json
+
+    if not data.get('file'):
+        return jsonify({"error": "No file path provided"}), 400
+
+    if not os.path.isfile(data.get('file')):
+        return jsonify({"error": "Provided is not an existing file path"}), 400
+
+    file_path = data.get("file")
+    file_path = os.path.abspath(file_path)
+    logging.info(f"File to transcribe: {file_path}")
+
+    try:
+        sound_file = sr.AudioFile(file_path)
+        with sound_file as source:
+            audio = recogniser.record(source)
+
+        result = recogniser.recognize_google(audio)
+        logging.info(f"Transcription: {result}")
+        
+    except Exception as e:
+        logging.error(e)
+        raise e
+    
+    return result
 
 
 # %% main part

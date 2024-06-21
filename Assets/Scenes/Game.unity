@@ -2581,6 +2581,7 @@ GameObject:
   - component: {fileID: 1426146488}
   - component: {fileID: 1426146489}
   - component: {fileID: 1426146490}
+  - component: {fileID: 1426146491}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2671,6 +2672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePhase: 3
+  cannon: {fileID: 698187893}
+  description: 
 --- !u!114 &1426146489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2752,6 +2755,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   llm: {fileID: 1426146489}
+--- !u!114 &1426146491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426146483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afda625e2ead4494ea0a82ff152cc711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1514445398
 PrefabInstance:
   m_ObjectHideFlags: 0

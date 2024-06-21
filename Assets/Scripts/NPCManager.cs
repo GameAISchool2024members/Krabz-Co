@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCManager : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class NPCManager : MonoBehaviour
         if (crabs.Count == 0 && seagulls.Count == 0)
         {
             Debug.Log("Yay! No more NPCs left!");
+            // Move to next scene
+             SceneManager.LoadScene("MainMenu");
         }
         
     }

@@ -77,6 +77,36 @@ public class AimingComponent : MonoBehaviour
         return new SplineData(startPosition, midPoint, endPosition, initialVelocity);
     }
 
+    public void generatePreviewSpline(int trajectoryIndex, LineRenderer lineRenderer, GameObject endPreview, int size)
+    {
+        if (trajectoryIndex < 0 || trajectoryIndex >= splines.Count)
+        {
+            throw new Exception("Invalid Trajectory Index");
+        }
+
+        Spline spline = splines[trajectoryIndex];
+
+        Vector3 startPosition = transform.position;
+        startPosition.y += spline.startPoint;
+
+        Vector3 endPosition = transform.position;
+        endPosition.y += spline.endPoint.y;
+        endPosition.z += spline.endPoint.x;
+
+        Vector3 midPoint = (startPosition + endPosition) / 2;
+        midPoint.y += spline.height;
+
+        lineRenderer.positionCount = size + 1;
+
+        for (int i = 0; i < size + 1; ++i)
+        {
+            Vector3 position = GetPoint(startPosition, midPoint, endPosition, (float)i / size);
+            lineRenderer.SetPosition(i, position);
+        }
+
+        endPreview.transform.position = endPosition;
+    }
+
     void OnDrawGizmosSelected()
     {
         for (int i = 0; i < splines.Count; ++i)

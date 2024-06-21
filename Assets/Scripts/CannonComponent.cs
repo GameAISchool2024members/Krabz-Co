@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AimingComponent))]
+[RequireComponent(typeof(LineRenderer))]
 public class CannonComponent : MonoBehaviour
 {
 
@@ -13,6 +14,7 @@ public class CannonComponent : MonoBehaviour
         set
         {
             currentTilt = value;
+            aimingComponent.generatePreviewSpline(currentTilt, lineRenderer, ballPreview.gameObject, 10);
         }
     }
 
@@ -30,7 +32,12 @@ public class CannonComponent : MonoBehaviour
     [SerializeField]
     private Sprite defaultImage;
 
+    [SerializeField]
+    private MeshFilter ballPreview;
+
     private AimingComponent aimingComponent;
+
+    private LineRenderer lineRenderer;
 
     private int currentTilt;
 
@@ -42,6 +49,7 @@ public class CannonComponent : MonoBehaviour
     void Start()
     {
         aimingComponent = GetComponent<AimingComponent>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     public void StartLoading()

@@ -15,6 +15,7 @@ The game uses various AI technologies to support all of this functionality.
 - Leonardo: Webapp to generating cannonball graphics 
 - Python speech recognition library: Recognizing and transcribing voice files
 
+# How to play
 ![crab game](Assets/Materials/t1.png)
 ![crab game](Assets/Materials/t2.png)
 

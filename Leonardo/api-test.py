@@ -13,6 +13,8 @@ import re
 
 from flask import Flask, request, jsonify
 
+from profanities import profanities as obscene_words
+
 # %% data for the API calls
 
 url = "https://cloud.leonardo.ai/api/rest/v1/generations"
@@ -64,16 +66,15 @@ app.config['SECRET_KEY'] = 'secret!'
 
 # %% profanity filter
 
-obscene_words = [
-    "fuck", "shit", "damn", "hell", "ass", "bitch", "bastard", "sex", "porn",
-    "blowjob", "cock", "pussy", "tits", "dick", "dildo", "cum", "orgasm",
-    "masturbation", "hentai", "anal", "fucker", "slut", "whore", "nigger",
-    "chink", "spic", "kike", "gook", "cracker", "wetback", "faggot", "dyke",
-    "weed", "cocaine", "heroin", "meth", "ecstasy", "crack", "LSD", "acid",
-    "retard", "cripple", "midget", "fag", "queer", "homo", "tranny", "boobie", "boobs", "boob", "hentai", "boobies"
-]
+def contains_obscene_word(text: str):
+    """Check if the argument string contains any of the obscene words.
 
-def contains_obscene_word(text):
+    Args:
+        text (str): String to check for profanity.
+
+    Returns:
+        bool: True or False.
+    """    
     text = text.lower()
     for word in obscene_words:
         if re.search(r'\b' + re.escape(word) + r'\b', text):
@@ -93,7 +94,7 @@ def generate_image(prompt: str=None):
             prompt = "rainbow flower"
         prompt = f"{prompt} trapped in a glass ball"
     else:
-        prompt = "skeleton monkey trapped in a glass ball"
+        prompt = "holy monkey trapped in a glass ball"
 
     payload = {
         "num_images": 1,
@@ -102,8 +103,9 @@ def generate_image(prompt: str=None):
         # "modelId": "2067ae52-33fd-4a82-bb92-c2c55e7d2786",
         "modelId": "b24e16ff-06e3-43eb-8d33-4416c2d75876",
         "sd_version": "SDXL_LIGHTNING",
+        "scheduler": "LEONARDO",
         "prompt": prompt,
-        "alchemy": True,
+        # "alchemy": True,
         "controlnets": [
                 {
                     "initImageId": "63e9a774-baeb-4c11-93fc-09acf5b24db6",
@@ -130,8 +132,6 @@ def generate_image(prompt: str=None):
     timeout = 15
 
     response = requests.post(url, json=payload, headers=headers, timeout=timeout)
-
-    # time.sleep(timeout)
 
     logging.debug(response.text)
 

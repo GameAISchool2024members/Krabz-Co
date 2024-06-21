@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     // Reference to the cube you want to move
     public Transform Player;
-    public GameObject Cannon;
+    public CannonComponent Cannon;
 
     // Locked Y and Z positions
     public float lockedY;
@@ -112,26 +112,26 @@ public class PlayerManager : MonoBehaviour
                     if (baseline_shoulder_midpoint - shoulderMidpoint.z > Threshold_Landmark_ShouldersZ && 
                         leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
                     {
-
-                            // Logic to handle when the distance exceeds the threshold
-                            Debug.Log("Shoulder movement exceeds threshold");
-                            Threshold_Landmark_MidShoulder = true;
-                            Cannon.transform.localRotation = Quaternion.Euler(25, Cannon.transform.localRotation.eulerAngles.y,
-                                Cannon.transform.localRotation.eulerAngles.z);
+                        // Logic to handle when the distance exceeds the threshold
+                        Threshold_Landmark_MidShoulder = true;
+                        Cannon.CurrentTilt = 0;
+                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(15, Cannon.cannonSprite.transform.localRotation.eulerAngles.y,
+                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
                     }
                     else if(baseline_shoulder_midpoint - shoulderMidpoint.z <= Threshold_Landmark_ShouldersZ &&
                         leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
                     {
-                        Debug.Log("Hands above shoulders");
                         Threshold_Landmark_MidShoulder = true;
-                        Cannon.transform.localRotation = Quaternion.Euler(-25, Cannon.transform.localRotation.eulerAngles.y,
-                            Cannon.transform.localRotation.eulerAngles.z);
+                        Cannon.CurrentTilt = 2;
+                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(-15, Cannon.cannonSprite.transform.localRotation.eulerAngles.y,
+                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
                     }
                     else
                     {
                         Threshold_Landmark_MidShoulder = false;
-                        Cannon.transform.localRotation = Quaternion.Euler(0, Cannon.transform.localRotation.eulerAngles.y, 
-                            Cannon.transform.localRotation.eulerAngles.z);
+                        Cannon.CurrentTilt = 1;
+                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(0, Cannon.cannonSprite.transform.localRotation.eulerAngles.y, 
+                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
                         
                     }
                 }

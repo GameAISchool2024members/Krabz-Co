@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AimingComponent))]
 [RequireComponent(typeof(LineRenderer))]
 public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
@@ -35,6 +34,8 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
     [SerializeField]
     private MeshFilter ballPreview;
 
+    public SpriteRenderer cannonSprite;
+
     private AimingComponent aimingComponent;
 
     private LineRenderer lineRenderer;
@@ -43,7 +44,7 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
 
     private bool canFire = false;
 
-    public Sprite ballTexture;
+    private Sprite ballTexture;
 
     // Start is called before the first frame update
     void Start()

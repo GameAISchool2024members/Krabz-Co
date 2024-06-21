@@ -17,22 +17,24 @@ public class AimTestComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GetComponent<Leonardo>().RequestImage("Furry lobster", cannon);
+        }
+
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             cannon.StartLoading();
-            cannon.CurrentTilt = 0;
             cannon.FireCannon();
         }
         else if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             cannon.StartLoading();
-            cannon.CurrentTilt = 1;
             cannon.FireCannon();
         }
         else if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             cannon.StartLoading();
-            cannon.CurrentTilt = 2;
             cannon.FireCannon();
         }
     }

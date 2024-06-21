@@ -17,21 +17,47 @@ public class GameProgression : MonoBehaviour
 
     void Update()
     {
+        StateLogic();
+    }
+    private void StateLogic()
+    {
         switch (GamePhase)
         {
             case GamePhases.CannonBallChoosingInfo:
             {
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    GamePhase = GamePhases.CannonballSpeaking;
+                    ChangeState(GamePhases.CannonballSpeaking);
                     EventManager.StartRecording();
                 }
-
                 break;
             }
         }
     }
 
+    private void ChangeState(GamePhases newPhase)
+    {
+        ExitState(GamePhase);
+        EnterState(newPhase);
+    }
+    
+    private void EnterState(GamePhases phase)
+    {
+        GamePhase = phase
+        switch (phase)
+        {
+            
+        }
+    }
+    private void ExitState(GamePhases phase)
+    {
+        switch (phase)
+        {
+            
+        } 
+    }
+    
+    
     private void RecordingComplete()
     {
         GamePhase = GamePhases.CannonballGeneration;

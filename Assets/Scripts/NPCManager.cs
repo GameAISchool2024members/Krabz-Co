@@ -41,22 +41,26 @@ public class NPCManager : MonoBehaviour
         // Loop through z axis rows
         for (int i = 0; i < zAxisRows.Count; i++)
         {
-            // Generate crabs in the current row and segment
-            GenerateNPCsInRow(crabPrefab, numCrabsSpawnLine, zAxisRows[i], floorStartX, floorEndX, crabs);
-
-            // Generate rabbits in the current row and segment
-            GenerateNPCsInRow(seagullsPrefab, numSeagullsSpawnLine, zAxisRows[i], floorStartX, floorEndX, seagulls, true);
+            // If we are not in the last row, generate crabs
+            if (i != zAxisRows.Count - 1)
+            {
+                // Generate crabs in the current row and segment
+                GenerateNPCsInRow(crabPrefab, numCrabsSpawnLine, zAxisRows[i], floorStartX, floorEndX, crabs);
+            }
+            else
+            {
+                GenerateNPCsInRow(seagullsPrefab, numSeagullsSpawnLine, zAxisRows[i], floorStartX, floorEndX, seagulls);
+            }
         }
     }
 
-    private void GenerateNPCsInRow(GameObject prefab, int numToSpawn, float z, float xstart, float xend, List<GameObject> npcList, bool isSeagull = false)
+    private void GenerateNPCsInRow(GameObject prefab, int numToSpawn, float z, float xstart, float xend, List<GameObject> npcList)
     {
-
         // Split the x axis into segments
         float segmentWidth = (xend - xstart) / xFloorSplits;
 
-        // Create a dictionary to store segment min and max values
-        Dictionary<int, float[]> segmentBounds = new Dictionary<int, float[]>();
+        // Create a list to store segment min and max values
+        List<float[]> segmentBounds = new List<float[]>();
 
         // Loop through the number of splits
         for (int i = 0; i < xFloorSplits; i++)
@@ -65,36 +69,29 @@ public class NPCManager : MonoBehaviour
             float segmentStart = xstart + (i * segmentWidth);
             float segmentEnd = segmentStart + segmentWidth;
 
-            // Add the segment to the dictionary
-            segmentBounds.Add(i, new float[] { segmentStart, segmentEnd });
+            // Add the segment to the list
+            segmentBounds.Add(new float[] { segmentStart, segmentEnd });
         }
 
-
+        // Evenly distribute the NPCs across segments
+        int segmentIndex = 0;
         for (int j = 0; j < numToSpawn; j++)
         {
-            // Get a random segment
-            int randomSegment = Random.Range(0, xFloorSplits);
-
             // Generate a random x position within the current segment
-            float randomX = Random.Range(segmentBounds[randomSegment][0], segmentBounds[randomSegment][1]);
+            float randomX = Random.Range(segmentBounds[segmentIndex][0], segmentBounds[segmentIndex][1]);
 
             // Spawn the NPC at the random position
             Vector3 spawnPosition = new Vector3(randomX, 0.1f, z);
             GameObject newNPC = Instantiate(prefab, spawnPosition, Quaternion.identity);
 
-            // Set rotation of x to 90
+            // Set rotation of x to 35
             newNPC.transform.rotation = Quaternion.Euler(35, 0, 0);
-
-            // If it's a seaguel, set the z-axis rows
-            if (isSeagull)
-            {
-                SeagulNPCMovement seagullMovement = newNPC.GetComponent<SeagulNPCMovement>();
-                seagullMovement.zAxisRows = zAxisRows;
-                seagullMovement.currentZIndex = zAxisRows.IndexOf(z);
-            }
 
             // Add the new NPC to the corresponding list
             npcList.Add(newNPC);
+
+            // Move to the next segment in a round-robin fashion
+            segmentIndex = (segmentIndex + 1) % xFloorSplits;
         }
     }
 

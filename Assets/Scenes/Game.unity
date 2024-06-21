@@ -2374,8 +2374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77ce69dbf3f7dc4499fbc2252d88710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCrabsSpawnLine: 2
-  numSeagullsSpawnLine: 1
+  numCrabsSpawnLine: 3
+  numSeagullsSpawnLine: 3
   xFloorSplits: 3
   zAxisRows:
   - 8
@@ -2384,8 +2384,8 @@ MonoBehaviour:
   crabPrefab: {fileID: 7222859223487158650, guid: 837ceb8396c2b194f9f1ae204c27f666, type: 3}
   seagullsPrefab: {fileID: 5854160611731459393, guid: 1b6a52904ea32ef4fa2493370a75f130, type: 3}
   floor: {fileID: 1720804771}
-  floorStartX: -10
-  floorEndX: 10
+  floorStartX: -12
+  floorEndX: 12
 --- !u!114 &1426146487
 MonoBehaviour:
   m_ObjectHideFlags: 0

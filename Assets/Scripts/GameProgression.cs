@@ -9,6 +9,7 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     {
         EventManager.OnRecordingComplete += RecordingComplete;
         EventManager.OnImageGenerated += ImageGenerated;
+        ChangeState(GamePhases.CannonBallChoosingInfo);
     }
 
     void OnDisable()
@@ -51,7 +52,15 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
         GamePhase = phase;
         switch (phase)
         {
-            
+            case GamePhases.CannonBallChoosingInfo:
+            {
+                    if(!GetComponent<Leonardo>().isFiring)
+                    {
+                        GetComponent<Leonardo>().RequestFire(cannon);
+                    }
+                    //GetComponent<Leonardo>().isFiring = false;
+                break;
+            }
         }
     }
     private void ExitState(GamePhases phase)
@@ -72,9 +81,10 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     
     private void RecordingComplete(string path)
     {
-        GamePhase = GamePhases.CannonballGeneration;
+        ChangeState(GamePhases.CannonballGeneration);
+
         GetComponent<Leonardo>().RequestAudioDescription(path, this);
-        
+        //GetComponent<Leonardo>().RequestFire(cannon);
     }
 
 

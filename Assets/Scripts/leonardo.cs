@@ -10,6 +10,10 @@ public class Leonardo : MonoBehaviour
 {
     private string url = "http://localhost:8008/get_image";
     private string audioUrl = "http://localhost:8008/transcribe";
+    private string fireUrl = "http://localhost:8008/listen";
+
+    public bool isFiring = false;
+
     // Start is called before the first frame update
     public void RequestImage(string prompt, IImageReceiver imageReceiver)
     {
@@ -19,6 +23,12 @@ public class Leonardo : MonoBehaviour
     public void RequestAudioDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
     {
         StartCoroutine(GenerateDescription(path, descriptionReceiver));
+    }
+
+    public void RequestFire(IFireReceiver fireReceiver)
+    {
+        isFiring = true;
+        StartCoroutine(GenerateFire(fireReceiver));
     }
 
     public interface IImageReceiver
@@ -33,8 +43,15 @@ public class Leonardo : MonoBehaviour
 
     }
 
+    public interface IFireReceiver
+    {
+        void Fire();
+
+    }
+
     public IEnumerator GenerateImage(string prompt, IImageReceiver imageReceiver)
     {
+       
         string processed_prompt = "{\"prompt\": \"" + prompt + " trapped in a glass ball\"}";
 
         Debug.Log(processed_prompt);
@@ -56,7 +73,9 @@ public class Leonardo : MonoBehaviour
         
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
+            imageReceiver.SetImage(null);
             Debug.LogError("Error: " + request.error);
+
         }
         else
         {
@@ -111,5 +130,42 @@ public class Leonardo : MonoBehaviour
 
             descriptionReceiver.SetDescription(request.downloadHandler.text);
         }
+    }
+
+    public IEnumerator GenerateFire(IFireReceiver fireReceiver)
+    {
+        while (isFiring)
+        {
+            string processed_prompt = "{}";
+
+            Debug.Log(processed_prompt);
+            // Create a new UnityWebRequest for a POST request
+            UnityWebRequest request = new UnityWebRequest(fireUrl, "POST");
+
+            // Set the request headers
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            // Convert prompt to a byte array
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(processed_prompt);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+
+            // Create a DownloadHandler to receive the response
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            // Send the request and wait for a response
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + request.error);
+            }
+            else
+            {
+                Debug.Log("Response: " + request.downloadHandler.text);
+
+                fireReceiver.Fire();
+            }
+        }
+        
     }
 }

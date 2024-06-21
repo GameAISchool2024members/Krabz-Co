@@ -292,7 +292,7 @@ def transcribe():
 
 @app.route("/listen", methods=["POST"])
 def listen():
-    speech = LiveSpeech(keyphrase=listen_keyword, kws_threshold=1e-20)
+    speech = LiveSpeech(keyphrase=listen_keyword, kws_threshold=1e-9)
     for phrase in speech:
         logging.info(phrase.segments(detailed=True))
         return "Go!"

@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AimingComponent))]
 [RequireComponent(typeof(LineRenderer))]
-public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
+public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.IFireReceiver
 {
 
     public int CurrentTilt
@@ -58,9 +58,16 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
         canFire = true;
     }
 
+    public void Fire()
+    {
+        StartLoading();
+        FireCannon();
+    }
+
     public void SetImage(Sprite texture)
     {
         ballTexture = texture;
+        EventManager.ImageGenerated();
     }
 
     public void FireCannon()
@@ -73,12 +80,12 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver
         CannonBallComponent cannonBall = Instantiate<CannonBallComponent>(cannonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         cannonBall.SplineData = aimingComponent.getSplineData(currentTilt);
         cannonBall.gameObject.transform.localScale *= ballTexture ? 1.5f : 0.8f;
-        Debug.Log((cannonBall.BallRenderer == null) + " "+(ballTexture == null) + " " + (defaultImage == null));
+
         cannonBall.BallRenderer.sprite = ballTexture ? ballTexture : defaultImage;
 
         if (ballTexture)
         {
-            ballTexture = null;
+            //ballTexture = null;
         }
     }
 }

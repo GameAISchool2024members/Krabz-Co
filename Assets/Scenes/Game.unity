@@ -1666,6 +1666,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8571076842341243442, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571076842341243442, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571076842341243442, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571076842341243442, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571076842583978916, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571076843237194833, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
       propertyPath: solution
       value: 
@@ -1678,6 +1698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Annotation Layer
       objectReference: {fileID: 0}
+    - target: {fileID: 8571076843876106072, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571076843980202029, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
       propertyPath: contents
       value: 
@@ -1686,6 +1710,10 @@ PrefabInstance:
       propertyPath: _contents
       value: 
       objectReference: {fileID: 8388806499988947296, guid: 8d206c5fd71ab7f5ea41eafe4ce5f200, type: 3}
+    - target: {fileID: 8571076844135231239, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571076844286272849, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1726,6 +1754,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1889892128}
     m_Modifications:
+    - target: {fileID: 615235980274847209, guid: 9e4308c3e97d26a388364cbe0ea8bfb4, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5404176934485794286, guid: 9e4308c3e97d26a388364cbe0ea8bfb4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1773,6 +1805,14 @@ PrefabInstance:
     - target: {fileID: 5404176935574894484, guid: 9e4308c3e97d26a388364cbe0ea8bfb4, type: 3}
       propertyPath: m_Name
       value: PoseDetection Annotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447834089412636778, guid: 9e4308c3e97d26a388364cbe0ea8bfb4, type: 3}
+      propertyPath: _color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241125562864823516, guid: 9e4308c3e97d26a388364cbe0ea8bfb4, type: 3}
+      propertyPath: _color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2365,6 +2405,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4965192403804369242, guid: 3b696480602fe21de85315216956bd42, type: 3}
+      propertyPath: _color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4965192403804369243, guid: 3b696480602fe21de85315216956bd42, type: 3}
       propertyPath: m_Name
       value: RoiFromLandmarks Annotation
@@ -2764,6 +2808,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoseLandmarks Annotation
       objectReference: {fileID: 0}
+    - target: {fileID: 1915238444563462421, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _leftLandmarkColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915238444563462421, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _rightLandmarkColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.r
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _lineWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106715738273262277, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _annotationPrefab
+      value: 
+      objectReference: {fileID: 4824063073641375834, guid: e86115b4d622fef4baf112ba9a1b54f6, type: 3}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _radius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _color.r
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913343085919651616, guid: 4418f6a92856c5b51b58a36e3be7ed5c, type: 3}
+      propertyPath: _annotationPrefab
+      value: 
+      objectReference: {fileID: 5105739270100195971, guid: ed380b538e56e724fa14debe61cb107e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3236,6 +3336,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 705621530}
     m_Modifications:
+    - target: {fileID: 3259285889726014649, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4076,7 +4180,7 @@ PrefabInstance:
       objectReference: {fileID: 1889892134}
     - target: {fileID: 5850198979010014858, guid: 24d349d9c78db0f3d94d4657029f4c5e, type: 3}
       propertyPath: _color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5850198979010014858, guid: 24d349d9c78db0f3d94d4657029f4c5e, type: 3}
       propertyPath: _color.b

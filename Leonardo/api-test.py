@@ -8,8 +8,8 @@ import argparse
 import os
 import re
 
-from PIL import Image
-import numpy as np
+# from PIL import Image
+# import numpy as np
 
 from flask import Flask, request, jsonify
 
@@ -99,8 +99,9 @@ def generate_image(prompt: str=None):
         "num_images": 1,
         "height": 512,
         "width": 512,
-        "modelId": "2067ae52-33fd-4a82-bb92-c2c55e7d2786",
-        # "modelId": "b24e16ff-06e3-43eb-8d33-4416c2d75876",
+        # "modelId": "2067ae52-33fd-4a82-bb92-c2c55e7d2786",
+        "modelId": "b24e16ff-06e3-43eb-8d33-4416c2d75876",
+        "sd_version": "SDXL_LIGHTNING",
         "prompt": prompt,
         "alchemy": True,
         "controlnets": [

@@ -22,6 +22,11 @@ public class AimTestComponent : MonoBehaviour
             GetComponent<Leonardo>().RequestImage("Furry lobster", cannon);
         }
 
+        if (Input.GetKeyDown(KeyCode.JoystickButton0))
+        {
+            cannon.StartLoading();
+            cannon.FireCannon();
+        }
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             cannon.StartLoading();

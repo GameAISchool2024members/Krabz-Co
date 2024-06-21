@@ -46,6 +46,8 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.
 
     private Sprite ballTexture;
 
+    public AudioSource CannonballReady;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,9 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.
     {
         ballTexture = texture;
         EventManager.ImageGenerated();
+
+        CannonballReady.Play();
+
     }
 
     public void FireCannon()

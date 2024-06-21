@@ -7,7 +7,7 @@ The game uses various AI technologies to support all of this functionality.
 
 ![crab game](Assets/Materials/CrabitTexture.png)
 
-## Technology and tools used
+# Technology and tools used
 - Unity: game engine
 - Mediapipe: translating body movements to machine-readable data
 - LLMUnity: Unity package to integrate language models
@@ -17,3 +17,6 @@ The game uses various AI technologies to support all of this functionality.
 
 ![crab game](Assets/Materials/t1.png)
 ![crab game](Assets/Materials/t2.png)
+
+# Example custom generated cannonball
+![crab game](Assets/Materials/bebe.jpg)

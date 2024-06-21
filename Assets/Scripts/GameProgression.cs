@@ -8,11 +8,13 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     void OnEnable()
     {
         EventManager.OnRecordingComplete += RecordingComplete;
+        EventManager.OnImageGenerated += ImageGenerated;
     }
 
     void OnDisable()
     {
         EventManager.OnRecordingComplete -= RecordingComplete;
+        EventManager.OnImageGenerated -= ImageGenerated;
     }
 
     void Update()
@@ -66,13 +68,18 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
         GetComponent<Leonardo>().RequestImage(description, cannon);
     }
 
-    public string description;
+    private string description;
     
     private void RecordingComplete(string path)
     {
         GamePhase = GamePhases.CannonballGeneration;
         GetComponent<Leonardo>().RequestAudioDescription(path, this);
-
+        
     }
 
+
+    private void ImageGenerated()
+    {
+        ChangeState(GamePhases.CannonBallChoosingInfo);
+    }
 }

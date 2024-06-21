@@ -59,7 +59,7 @@ public class GameProgression : MonoBehaviour
     
     private void EnterState(GamePhases phase)
     {
-        GamePhase = phase
+        GamePhase = phase;
         switch (phase)
         {
             

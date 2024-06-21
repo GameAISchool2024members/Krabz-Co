@@ -4,6 +4,7 @@ using UnityEngine;
 using Mediapipe.Unity;
 public class PlayerManager : MonoBehaviour
 {
+    
     // Reference to the cube you want to move
     public Transform Player;
     public CannonComponent Cannon;
@@ -48,6 +49,18 @@ public class PlayerManager : MonoBehaviour
         // Initialize the locked Y and Z values if not set in the Inspector
         lockedY = Player.position.y;
         lockedZ = Player.position.z;
+
+        baseline_shoulder_midpoint = Calibration.Instance.baseline_shoulder_midpoint;
+
+        distanceThreshold = Calibration.Instance.distanceThreshold;
+        baselineSet_MidShoulders = Calibration.Instance.baselineSet_MidShoulders;
+        Debug.Log("Baseline set to: " + baseline_shoulder_midpoint);
+
+        leftHandToShoulderDistance_baseline = Calibration.Instance.leftHandToShoulderDistance_baseline;
+        rightHandToShoulderDistance_baseline = Calibration.Instance.rightHandToShoulderDistance_baseline;
+        //DontDestroyOnLoad(gameObject);
+
+
     }
 
     void Update()
@@ -87,19 +100,6 @@ public class PlayerManager : MonoBehaviour
                 // Apply the new position to the cube
                 Player.position = currentPosition;
 
-                // Check for baseline setting
-                if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton0))
-                {
-                    baseline_shoulder_midpoint = shoulderMidpoint.z;
-                    baselineDistance = Mathf.Abs(baseline_shoulder_midpoint - currentPosition.z);
-                    distanceThreshold = baselineDistance * 0.9f;
-                    baselineSet_MidShoulders = true;
-                    Debug.Log("Baseline set to: " + baseline_shoulder_midpoint);
-
-                    leftHandToShoulderDistance_baseline = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
-                    rightHandToShoulderDistance_baseline = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
-                    
-                }
 
 
                 // Calculate the current distance from the baseline

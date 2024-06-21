@@ -5,11 +5,15 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Calibration");
     }
 
     public void LoadHowToScene()
     {
         SceneManager.LoadScene("HowTo");
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

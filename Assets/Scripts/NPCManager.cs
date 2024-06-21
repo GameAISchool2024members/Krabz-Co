@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
-
     // Total number of crabs and rabbits to spawn
-    public int numCrabsSpawn;
-    public int numRabbitsSpawn;
+    public int numCrabsSpawnLine;
+    public int numSeagullsSpawnLine;
 
     public int xFloorSplits = 4;
 
@@ -15,7 +14,7 @@ public class NPCManager : MonoBehaviour
 
     // Game object prefabs
     public GameObject crabPrefab;
-    public GameObject rabbitPrefab;
+    public GameObject seagullsPrefab;
 
     // Scene floor
     public GameObject floor;
@@ -24,73 +23,84 @@ public class NPCManager : MonoBehaviour
     public float floorStartX = -3.3f;
     public float floorEndX = 3.5f;
 
-    // Current crab and rabbits
+    // Current crabs and rabbits
     private List<GameObject> crabs;
-    private List<GameObject> rabbits;
-
+    private List<GameObject> seagulls;
 
     // Start is called before the first frame update
     void Start()
     {
         crabs = new List<GameObject>();
+        seagulls = new List<GameObject>();
         GenerateNPCs();
     }
 
     private void GenerateNPCs()
     {
 
-        // Get floor boundaries
-
-        float floorWidth = floorEndX - floorStartX;
-
-        // Calculate the width of each segment
-        float segmentWidth = floorWidth / 4.0f;
-
-        for (int i = 0; i < xFloorSplits; i++)
+        // Loop through z axis rows
+        for (int i = 0; i < zAxisRows.Count; i++)
         {
-            // Calculate the start and end positions of the current segment
-            float segmentStartX = floorStartX + (segmentWidth * i);
-            float segmentEndX = segmentStartX + segmentWidth;
+            // Generate crabs in the current row and segment
+            GenerateNPCsInRow(crabPrefab, numCrabsSpawnLine, zAxisRows[i], floorStartX, floorEndX, crabs);
 
-            // Loop rows
-            for (int j = 0; j < zAxisRows.Count; j++)
-            {
-                // Generate crabs
-                GenerateCrabs(zAxisRows[j], segmentStartX, segmentEndX);
-            }
+            // Generate rabbits in the current row and segment
+            GenerateNPCsInRow(seagullsPrefab, numSeagullsSpawnLine, zAxisRows[i], floorStartX, floorEndX, seagulls, true);
         }
     }
 
-    private void GenerateCrabs(float z, float xstart, float xend)
+    private void GenerateNPCsInRow(GameObject prefab, int numToSpawn, float z, float xstart, float xend, List<GameObject> npcList, bool isSeagull = false)
     {
-        // Spawn the NPC at the random position
-        for (int j = 0; j < numCrabsSpawn / xFloorSplits / zAxisRows.Count; j++)
+
+        // Split the x axis into segments
+        float segmentWidth = (xend - xstart) / xFloorSplits;
+
+        // Create a dictionary to store segment min and max values
+        Dictionary<int, float[]> segmentBounds = new Dictionary<int, float[]>();
+
+        // Loop through the number of splits
+        for (int i = 0; i < xFloorSplits; i++)
         {
+            // Calculate the start and end of the segment
+            float segmentStart = xstart + (i * segmentWidth);
+            float segmentEnd = segmentStart + segmentWidth;
+
+            // Add the segment to the dictionary
+            segmentBounds.Add(i, new float[] { segmentStart, segmentEnd });
+        }
+
+
+        for (int j = 0; j < numToSpawn; j++)
+        {
+            // Get a random segment
+            int randomSegment = Random.Range(0, xFloorSplits);
+
             // Generate a random x position within the current segment
-            float randomX = Random.Range(xstart, xend);
+            float randomX = Random.Range(segmentBounds[randomSegment][0], segmentBounds[randomSegment][1]);
 
+            // Spawn the NPC at the random position
             Vector3 spawnPosition = new Vector3(randomX, 0.1f, z);
-            GameObject newCrab = (GameObject)Instantiate(crabPrefab, spawnPosition, Quaternion.identity);
-
-            //Debug.Log(newCrab.position);
-
-            //// Set position y to 0.1
-            //newCrab.transform.position = new Vector3(newCrab.transform.position.x, 0, newCrab.transform.position.z);
+            GameObject newNPC = Instantiate(prefab, spawnPosition, Quaternion.identity);
 
             // Set rotation of x to 90
-            newCrab.transform.rotation = Quaternion.Euler(90, 0, 0);
+            newNPC.transform.rotation = Quaternion.Euler(35, 0, 0);
 
-            // Get CrabNPCMovement component
-            CrabNPCMovement crabMovement = newCrab.GetComponent<CrabNPCMovement>();
+            // If it's a seaguel, set the z-axis rows
+            if (isSeagull)
+            {
+                SeagulNPCMovement seagullMovement = newNPC.GetComponent<SeagulNPCMovement>();
+                seagullMovement.zAxisRows = zAxisRows;
+                seagullMovement.currentZIndex = zAxisRows.IndexOf(z);
+            }
 
-
-            crabs.Add(newCrab);
+            // Add the new NPC to the corresponding list
+            npcList.Add(newNPC);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

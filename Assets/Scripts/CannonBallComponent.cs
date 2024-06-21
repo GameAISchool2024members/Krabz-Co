@@ -37,7 +37,7 @@ public class CannonBallComponent : MonoBehaviour
     private float trajectoryTime = 0f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ballRenderer = GetComponent<SpriteRenderer>();
     }

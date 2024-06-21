@@ -6,7 +6,7 @@ using System.Collections;
 using UnityEngine.Networking;
 
 
-public class leonardo : MonoBehaviour
+public class Leonardo : MonoBehaviour
 {
     private string url = "http://localhost:8008/get_image";
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class leonardo : MonoBehaviour
 
         // Send the request and wait for a response
         yield return request.SendWebRequest();
-
+        
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError("Error: " + request.error);
@@ -56,9 +56,8 @@ public class leonardo : MonoBehaviour
         {
             Debug.Log("Response: " + request.downloadHandler.text);
 
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file:///home/bogdan/Documents/Projekti/Krabz-Co/" + request.downloadHandler.text.Replace("\"", "")))
+            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file://"+request.downloadHandler.text.Replace("\"", "")))
             {
-                Debug.Log("file:///home/bogdan/Documents/Projekti/Krabz-Co/" + request.downloadHandler.text.Replace("\"", ""));
                 yield return uwr.SendWebRequest();
 
                 if (uwr.result != UnityWebRequest.Result.Success)
@@ -67,13 +66,10 @@ public class leonardo : MonoBehaviour
                 }
                 else
                 {
-                    var texture = DownloadHandlerTexture.GetContent(uwr);
-                    Debug.Log("Text: "+texture.width+ " "+texture.height);
-                    imageReceiver.SetImage(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero));
+                    Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                    imageReceiver.SetImage(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
                 }
             }
-
-            // You can handle the response here (e.g., parse JSON, download an image, etc.)
         }
     }
 

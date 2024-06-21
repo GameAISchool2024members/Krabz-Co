@@ -10,10 +10,6 @@ public class AimingComponent : MonoBehaviour
     public class Spline
     {
         [SerializeField]
-        [MinAttribute(0.0001f)]
-        public float scaleSpeed;
-
-        [SerializeField]
         public float startPoint;
 
         [SerializeField]

@@ -1,14 +1,11 @@
-namespace DefaultNamespace
+public enum GamePhases
 {
-	public enum GamePhases
-	{
-		GameLoading ,
-		Tutorial ,
-		Calibration ,
-		CannonBallChoosingInfo,
-		CannonballSpeaking,
-		CannonballGeneration ,
-		CannonMovement ,
-		CannonballFlying,
-	}
+	GameLoading,
+	Tutorial,
+	Calibration,
+	CannonBallChoosingInfo,
+	CannonballSpeaking,
+	CannonballGeneration,
+	CannonMovement,
+	CannonballFlying,
 }

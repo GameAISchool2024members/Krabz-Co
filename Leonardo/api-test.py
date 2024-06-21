@@ -7,6 +7,7 @@ import logging
 import argparse
 import os
 import re
+import asyncio
 
 # from PIL import Image
 # import numpy as np
@@ -17,6 +18,8 @@ from flask import Flask, request, jsonify
 # import soundfile as sf
 
 import speech_recognition as sr
+
+from pocketsphinx import LiveSpeech
 
 from profanities import profanities as obscene_words
 
@@ -29,6 +32,8 @@ auth_token = "0f93149b-5a5f-41be-8bc3-47ae8010cd01"
 auth_token_alt = "51bcc764-d533-4784-97f2-19c701939f8a"
 
 authorisation = f"Bearer: {auth_token}"
+
+listen_keyword = "fire"
 
 # %% additional stuff
 
@@ -285,6 +290,13 @@ def transcribe():
     
     return result
 
+@app.route("/listen", methods=["POST"])
+def listen():
+    speech = LiveSpeech(keyphrase=listen_keyword, kws_threshold=1e-20)
+    for phrase in speech:
+        logging.info(phrase.segments(detailed=True))
+        return "Go!"
+
 
 # %% main part
 
@@ -293,6 +305,7 @@ parser = argparse.ArgumentParser(description="Example script for Leonardo API")
 parser.add_argument('--generate', action='store_true', help='Generate and get an image')
 parser.add_argument('--init', action='store_true', help="Upload init image")
 parser.add_argument('--api', action='store_true', help="Start the API")
+# parser.add_argument('--listen', type=str, required=False, help="Listen for the keyword")
 parser.add_argument('--getimage', type=str, required=False, help='ID of the image to get')
 parser.add_argument('--image', type=str, required=False, help='Prompt for the image to generate')
 
@@ -300,11 +313,6 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     if args.api:
-        # tcp_thread = threading.Thread(target=start_tcp_server)
-        # tcp_thread.daemon = True
-        # tcp_thread.start()
-
-        # app.run(debug=True)
         app.run(debug=True, host="0.0.0.0", port="8008")
     
     if args.generate:
@@ -315,6 +323,9 @@ if __name__ == "__main__":
 
     if args.getimage:
         get_image(args.getimage)
+
+    # if args.listen:
+    #     listen_keyword = args.listen
 
     if args.init:
         upload_init_image()

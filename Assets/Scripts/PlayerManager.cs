@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
 
                 // Update the X position to match the shoulder midpoint X position
                 Vector3 currentPosition = Player.position;
-                currentPosition.x = -shoulderMidpoint.x;
+                currentPosition.x = shoulderMidpoint.x;
                 Z_MidPointShoulders = shoulderMidpoint.z;
                 // Keep the Y and Z positions locked
                 currentPosition.y = lockedY;
@@ -105,20 +105,19 @@ public class PlayerManager : MonoBehaviour
                 // Calculate the current distance from the baseline
                 if (baselineSet_MidShoulders)
                 {
-                    float currentDistance = Mathf.Abs(shoulderMidpoint.z - Player.position.z);
                     //// Calculate distances between hands and shoulders
                     leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
                     rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
-
-                    if (currentDistance > distanceThreshold && shoulderMidpoint.z < Threshold_Landmark_ShouldersZ && leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance
-                    && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
+   
+                    if (baseline_shoulder_midpoint -shoulderMidpoint.z > Threshold_Landmark_ShouldersZ && 
+                        leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
                     {
-                        // Logic to handle when the distance exceeds the threshold
-                        Debug.Log("Shoulder movement exceeds threshold");
-                        Threshold_Landmark_MidShoulder = true;
-                        Cannon.transform.localRotation = Quaternion.Euler(50, Cannon.transform.localRotation.eulerAngles.y, 
-                            Cannon.transform.localRotation.eulerAngles.z);
-                        
+
+                            // Logic to handle when the distance exceeds the threshold
+                            Debug.Log("Shoulder movement exceeds threshold");
+                            Threshold_Landmark_MidShoulder = true;
+                            Cannon.transform.localRotation = Quaternion.Euler(50, Cannon.transform.localRotation.eulerAngles.y,
+                                Cannon.transform.localRotation.eulerAngles.z);
                     }
                     else
                     {

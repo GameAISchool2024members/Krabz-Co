@@ -5,8 +5,6 @@ using UnityEngine;
 public class CrabNPCMovement : NPCMovement
 {
     private bool movingRight = true;
-    public float constrainerStart;
-    public float constrainerEnd;
 
     private bool changedDirection = false;
     private float lastDirectionChange;
@@ -15,6 +13,8 @@ public class CrabNPCMovement : NPCMovement
     void Start()
     {
         ChangeMovementSpeed();
+        // Randomly set the direction of the crab
+        movingRight = Random.Range(0, 2) == 0;
     }
 
     // Update is called once per frame

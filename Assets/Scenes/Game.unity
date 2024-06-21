@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 3370064976983512019, guid: 8915e1b283a57094584c92b21e187bd1, type: 3}
+  defaultImage: {fileID: 0}
 --- !u!114 &698187894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1952,7 +1953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1182686723
 Animator:
   serializedVersion: 5
@@ -2456,18 +2457,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77ce69dbf3f7dc4499fbc2252d88710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCrabsSpawn: 9
-  numRabbitsSpawn: 0
+  numCrabsSpawnLine: 2
+  numSeagullsSpawnLine: 1
   xFloorSplits: 3
   zAxisRows:
   - 5
   - 7
   - 9
   crabPrefab: {fileID: 7222859223487158650, guid: 837ceb8396c2b194f9f1ae204c27f666, type: 3}
-  rabbitPrefab: {fileID: 0}
+  seagullsPrefab: {fileID: 5854160611731459393, guid: 1b6a52904ea32ef4fa2493370a75f130, type: 3}
   floor: {fileID: 1720804771}
-  floorStartX: -3.3
-  floorEndX: 3.5
+  floorStartX: -10
+  floorEndX: 10
 --- !u!114 &1426146487
 MonoBehaviour:
   m_ObjectHideFlags: 0

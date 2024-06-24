@@ -4,10 +4,12 @@ public class EventManager : MonoBehaviour
 {
     public delegate void EventHandler();
     public delegate void RecordingCompleteHandler(string path);
+    public delegate void ScorePointHandler(int points);
 
     public static event EventHandler OnStartRecording;
     public static event EventHandler OnImageGenerated;
     public static event RecordingCompleteHandler OnRecordingComplete;
+    public static event ScorePointHandler OnScorePoint;
 
     public static void StartRecording()
     {
@@ -25,5 +27,11 @@ public class EventManager : MonoBehaviour
     {
         Debug.Log("EventManager: Recording Complete event triggered");
         OnRecordingComplete?.Invoke(path);
+    }
+
+    public static void ScorePoint(int points)
+    {
+        Debug.Log("EventManager: Score Point event triggered");
+        OnScorePoint?.Invoke(points);
     }
 }

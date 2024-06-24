@@ -75,6 +75,13 @@ public class CannonBallComponent : MonoBehaviour
    
     public void OnTriggerEnter(Collider other)
     {
+        // If hit a game object with EnemyComponent invoke score point event
+        if (other.gameObject.GetComponent<EnemyComponent>())
+        {
+            EventManager.ScorePoint(10);
+        }
+
+
         DestroyCannonBall();
     }
 }

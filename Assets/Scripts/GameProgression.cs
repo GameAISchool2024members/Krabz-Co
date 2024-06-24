@@ -1,21 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
 {
     public GamePhases GamePhase ;
     public CannonComponent cannon;
+    public Text scoreText;
+
+    private int score;
 
     void OnEnable()
     {
         EventManager.OnRecordingComplete += RecordingComplete;
         EventManager.OnImageGenerated += ImageGenerated;
         ChangeState(GamePhases.CannonBallChoosingInfo);
+        EventManager.OnScorePoint += ChangeScore;
     }
 
     void OnDisable()
     {
         EventManager.OnRecordingComplete -= RecordingComplete;
         EventManager.OnImageGenerated -= ImageGenerated;
+        EventManager.OnScorePoint -= ChangeScore;
     }
 
     void Update()
@@ -91,5 +97,12 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     private void ImageGenerated()
     {
         ChangeState(GamePhases.CannonBallChoosingInfo);
+    }
+
+    private void ChangeScore(int points)
+    {
+        score += points;
+        Debug.Log("Score: " + score);
+        scoreText.text = score.ToString();
     }
 }

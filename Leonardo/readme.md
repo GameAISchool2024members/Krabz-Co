@@ -35,6 +35,7 @@ credentials = {
 ```
 
 For example, using Ubuntu:
+
 ```bash
 cp "credentials template.py" "credentials.py"
 sed -i 's/<API key>/Your-auth-token/g' credentials.py
@@ -66,7 +67,7 @@ cURL example:
 curl --request POST --url http://localhost:8008/get_image --header 'content-type: application/json' --data '{"prompt": "furry lobster"}'
 ```
 
-In order to ensure smooth generation of images usable by the game Crab It, the applicable initial image must be uploaded first: [this one](init_image.jpg). Image ID (received after using acript agument `--init`) of the uploaded init image must be added to line `102` in `server.py`. Then that whole block (`server.py` lines 100-107, inclusive, the key `controlnets`), should be uncommented.
+In order to ensure smooth generation of images usable by the game Crab It, the applicable initial image must be uploaded first: [this one](init_image.jpg). Image ID (received after using script argument `--init`) of the uploaded init image must be added to line `102` in `server.py`. Then that whole block (`server.py` lines 100-107, inclusive, the key `controlnets`), should be uncommented.
 
 ![alt text](init_image.jpg)
 

@@ -4,19 +4,8 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(AimingComponent))]
-[RequireComponent(typeof(LineRenderer))]
 public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.IFireReceiver
 {
-
-    public int CurrentTilt
-    {
-        set
-        {
-            currentTilt = value;
-            aimingComponent.generatePreviewSpline(currentTilt, lineRenderer, ballPreview.gameObject, 10);
-        }
-    }
-
     public bool CanFire
     {
         get
@@ -32,27 +21,21 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.
     private Sprite defaultImage;
 
     [SerializeField]
-    private MeshFilter ballPreview;
+    private AudioClip cannonBallReadySound;
 
-    public SpriteRenderer cannonSprite;
+    private AudioSource audioSource;
 
     private AimingComponent aimingComponent;
-
-    private LineRenderer lineRenderer;
-
-    private int currentTilt;
 
     private bool canFire = false;
 
     private Sprite ballTexture;
 
-    public AudioSource CannonballReady;
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         aimingComponent = GetComponent<AimingComponent>();
-        lineRenderer = GetComponent<LineRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartLoading()
@@ -71,8 +54,7 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.
         ballTexture = texture;
         EventManager.ImageGenerated();
 
-        CannonballReady.Play();
-
+        audioSource.PlayOneShot(cannonBallReadySound);
     }
 
     public void FireCannon()
@@ -82,11 +64,7 @@ public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.
             return;
         }
 
-        CannonBallComponent cannonBall = Instantiate<CannonBallComponent>(cannonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        cannonBall.SplineData = aimingComponent.getSplineData(currentTilt);
-        cannonBall.gameObject.transform.localScale *= ballTexture ? 1.5f : 0.8f;
-
-        cannonBall.BallRenderer.sprite = ballTexture ? ballTexture : defaultImage;
+        CannonBallComponent cannonBall = cannonPrefab.Instantiate(aimingComponent.getSplineData(), ballTexture);
 
         if (ballTexture)
         {

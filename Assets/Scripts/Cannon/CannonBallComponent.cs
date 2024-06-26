@@ -30,19 +30,22 @@ public class CannonBallComponent : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private GameObject Explosion;
+
     private SpriteRenderer ballRenderer;
 
     private AimingComponent.SplineData splineData = null;
 
     private float trajectoryTime = 0f;
-    public GameObject Explosion;
-    // Start is called before the first frame update
-    void Awake()
+    
+
+    private void Awake()
     {
         ballRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
 
         if (splineData == null)
@@ -64,13 +67,9 @@ public class CannonBallComponent : MonoBehaviour
 
     public void DestroyCannonBall()
     {
-        
-
         Destroy(gameObject);
         NPCManager.Instance.ExplosionOfNPC(gameObject.transform);
         // Start the coroutine to instantiate the explosion after a delay
-
-
     }
    
     public void OnTriggerEnter(Collider other)

@@ -17,6 +17,9 @@ public class AimingComponent : MonoBehaviour
 
         [SerializeField]
         public float height;
+
+        [SerializeField]
+        public float rotation;
     }
 
     public class SplineData
@@ -37,28 +40,52 @@ public class AimingComponent : MonoBehaviour
         public float initialVelocity;
     }
 
+    public int CurrentTilt
+    {
+        set
+        {
+            currentTilt = value;
+
+            if (currentTilt < 0 || currentTilt >= splines.Count)
+            {
+                throw new Exception("Invalid Trajectory Index");
+            }
+
+            generatePreviewSpline(ballPreview.gameObject, 10);
+
+            Vector3 currentRotation = cannonSprite.transform.localRotation.eulerAngles;
+            cannonSprite.transform.localRotation = Quaternion.Euler(splines[currentTilt].rotation, currentRotation.y, currentRotation.z);
+        }
+    }
+
+    static private int debugSplineMaxSegments = 10;
+
+    [Header("Aiming")]
     [SerializeField]
     private List<Spline> splines;
 
     [SerializeField]
     [MinAttribute(0.0001f)]
-    float initialVelocity = 0.0001f;
+    private float initialVelocity = 0.0001f;
 
+    [SerializeField]
+    private SpriteRenderer cannonSprite;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private MeshFilter ballPreview;
+
+    private int currentTilt;
+
+    private LineRenderer lineRenderer;
+
+    public SplineData getSplineData()
     {
-        enabled = false;
-    }
-
-    public SplineData getSplineData(int trajectoryIndex)
-    {
-        if (trajectoryIndex < 0 || trajectoryIndex >= splines.Count)
+        if (currentTilt < 0 || currentTilt >= splines.Count)
         {
             throw new Exception("Invalid Trajectory Index");
         }
 
-        Spline spline = splines[trajectoryIndex];
+        Spline spline = splines[currentTilt];
 
         Vector3 startPosition = transform.position;
         startPosition.y += spline.startPoint;
@@ -73,14 +100,14 @@ public class AimingComponent : MonoBehaviour
         return new SplineData(startPosition, midPoint, endPosition, initialVelocity);
     }
 
-    public void generatePreviewSpline(int trajectoryIndex, LineRenderer lineRenderer, GameObject endPreview, int size)
+    public void generatePreviewSpline(GameObject endPreview, int size)
     {
-        if (trajectoryIndex < 0 || trajectoryIndex >= splines.Count)
+        if (currentTilt < 0 || currentTilt >= splines.Count)
         {
             throw new Exception("Invalid Trajectory Index");
         }
 
-        Spline spline = splines[trajectoryIndex];
+        Spline spline = splines[currentTilt];
 
         Vector3 startPosition = transform.position;
         startPosition.y += spline.startPoint;
@@ -103,7 +130,12 @@ public class AimingComponent : MonoBehaviour
         endPreview.transform.position = endPosition;
     }
 
-    void OnDrawGizmosSelected()
+    private void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void OnDrawGizmosSelected()
     {
         for (int i = 0; i < splines.Count; ++i)
         {
@@ -123,9 +155,9 @@ public class AimingComponent : MonoBehaviour
             midPoint.y += spline.height;
             Gizmos.DrawWireSphere(midPoint, 0.25f);
 
-            for (int j = 0; j < 10; ++j)
+            for (int j = 0; j < debugSplineMaxSegments; ++j)
             {
-                Gizmos.DrawLine(GetPoint(startPosition, midPoint, endPosition, j / 10f), GetPoint(startPosition, midPoint, endPosition, (j + 1) / 10f));
+                Gizmos.DrawLine(GetPoint(startPosition, midPoint, endPosition, j / (float)debugSplineMaxSegments), GetPoint(startPosition, midPoint, endPosition, (j + 1) / (float)debugSplineMaxSegments));
             }
 
         }

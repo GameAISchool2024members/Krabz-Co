@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mediapipe.Unity;
+
 public class PlayerManager : MonoBehaviour
 {
     
     // Reference to the cube you want to move
     public Transform Player;
-    public CannonComponent Cannon;
+    public GameObject cannon;
+
+    private CannonComponent cannonComponent;
+    private AimingComponent aimingComponent;
 
     // Locked Y and Z positions
     public float lockedY;
@@ -46,6 +50,9 @@ public class PlayerManager : MonoBehaviour
     public float baselineDistance;
     void Start()
     {
+        cannonComponent = cannon.GetComponent<CannonComponent>();
+        aimingComponent = cannon.GetComponent<AimingComponent>();
+
         // Initialize the locked Y and Z values if not set in the Inspector
         lockedY = Player.position.y;
         lockedZ = Player.position.z;
@@ -60,15 +67,13 @@ public class PlayerManager : MonoBehaviour
         rightHandToShoulderDistance_baseline = Calibration.Instance.rightHandToShoulderDistance_baseline;
         //DontDestroyOnLoad(gameObject);
 
-
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.Space))
         {
-            Cannon.StartLoading();
-            Cannon.FireCannon();
+            cannonComponent.Fire();
         }
         // Ensure that pose landmarks are available
         if (poseLandmarkListAnnotation != null)
@@ -119,34 +124,23 @@ public class PlayerManager : MonoBehaviour
                     {
                         // Logic to handle when the distance exceeds the threshold
                         Threshold_Landmark_MidShoulder = true;
-                        Cannon.CurrentTilt = 0;
-                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(15, Cannon.cannonSprite.transform.localRotation.eulerAngles.y,
-                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
+                        aimingComponent.CurrentTilt = 0;
                     }
                     else if(baseline_shoulder_midpoint - shoulderMidpoint.z <= Threshold_Landmark_ShouldersZ &&
                         leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
                     {
                         Threshold_Landmark_MidShoulder = true;
-                        Cannon.CurrentTilt = 2;
-                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(-15, Cannon.cannonSprite.transform.localRotation.eulerAngles.y,
-                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
+                        aimingComponent.CurrentTilt = 2;
                     }
                     else
                     {
                         Threshold_Landmark_MidShoulder = false;
-                        Cannon.CurrentTilt = 1;
-                        Cannon.cannonSprite.transform.localRotation = Quaternion.Euler(0, Cannon.cannonSprite.transform.localRotation.eulerAngles.y, 
-                            Cannon.cannonSprite.transform.localRotation.eulerAngles.z);
+                        aimingComponent.CurrentTilt = 1;
                         
                     }
                 }
-                
-
-                
 
             }
-
-
         }
     }
 

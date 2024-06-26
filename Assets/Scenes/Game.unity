@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1344,7 +1345,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.4, y: 2.5, z: -0.7}
-  m_LocalScale: {x: 0.49795, y: 0.49795, z: 0.49795}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 643088665}
@@ -1365,9 +1366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 3370064976983512019, guid: 8915e1b283a57094584c92b21e187bd1, type: 3}
   defaultImage: {fileID: 21300000, guid: 516158850658e324c85902d8899bba8a, type: 3}
-  ballPreview: {fileID: 643088667}
-  cannonSprite: {fileID: 2090232545}
-  CannonballReady: {fileID: 698187897}
+  cannonBallReadySound: {fileID: 8300000, guid: b1fe98f72989bed45a34167bbabe5465, type: 3}
 --- !u!114 &698187894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,15 +1381,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splines:
   - startPoint: -0.8
-    endPoint: {x: 8, y: -4}
-    height: 1.3
+    endPoint: {x: 8, y: -5}
+    height: 2.18
+    rotation: 15
   - startPoint: -0.3
-    endPoint: {x: 13.5, y: -4}
-    height: 4.74
+    endPoint: {x: 13.5, y: -5}
+    height: 5.6
+    rotation: 0
   - startPoint: 0.25
-    endPoint: {x: 19, y: -4}
-    height: 6.19
+    endPoint: {x: 19, y: -5}
+    height: 8.6
+    rotation: -15
   initialVelocity: 0.5
+  cannonSprite: {fileID: 2090232545}
+  ballPreview: {fileID: 643088667}
 --- !u!120 &698187896
 LineRenderer:
   serializedVersion: 2
@@ -2934,7 +2938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1980009636}
-  Cannon: {fileID: 698187893}
+  cannon: {fileID: 698187890}
   lockedY: 0
   lockedZ: 0
   poseLandmarkListAnnotation: {fileID: 1514445399}
@@ -4017,7 +4021,7 @@ GameObject:
   - component: {fileID: 1980009637}
   - component: {fileID: 1980009638}
   m_Layer: 0
-  m_Name: Crab_0
+  m_Name: Crab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(AimingComponent))]
-public class CannonComponent : MonoBehaviour, RequestProcessor.IImageReceiver, RequestProcessor.IFireReceiver
+public class CannonComponent : MonoBehaviour
 {
     public bool CanFire
     {
@@ -31,6 +31,18 @@ public class CannonComponent : MonoBehaviour, RequestProcessor.IImageReceiver, R
 
     private Sprite ballTexture;
 
+    private void OnEnable()
+    {
+        EventManager.OnFire += Fire;
+        EventManager.OnImageGenerated += SetImage;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnFire -= Fire;
+        EventManager.OnImageGenerated -= SetImage;
+
+    }
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,7 +64,6 @@ public class CannonComponent : MonoBehaviour, RequestProcessor.IImageReceiver, R
     public void SetImage(Sprite texture)
     {
         ballTexture = texture;
-        EventManager.ImageGenerated();
 
         audioSource.PlayOneShot(cannonBallReadySound);
     }

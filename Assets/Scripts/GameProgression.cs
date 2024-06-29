@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescriptionReceiver
+[RequireComponent(typeof(RequestProcessor))]
+public class GameProgression : MonoBehaviour
 {
     public GamePhases GamePhase ;
     public CannonComponent cannon;
@@ -9,22 +10,31 @@ public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescription
 
     private int score;
 
-    void OnEnable()
+    private RequestProcessor processor;
+
+    private void Start()
+    {
+        processor = GetComponent<RequestProcessor>();
+        ChangeState(GamePhases.CannonBallChoosingInfo);
+    }
+
+    private void OnEnable()
     {
         EventManager.OnRecordingComplete += RecordingComplete;
         EventManager.OnImageGenerated += ImageGenerated;
-        ChangeState(GamePhases.CannonBallChoosingInfo);
         EventManager.OnScorePoint += ChangeScore;
+        EventManager.OnAudioDescriptionProcessed += SetDescription;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EventManager.OnRecordingComplete -= RecordingComplete;
         EventManager.OnImageGenerated -= ImageGenerated;
         EventManager.OnScorePoint -= ChangeScore;
+        EventManager.OnAudioDescriptionProcessed -= SetDescription;
     }
 
-    void Update()
+    private void Update()
     {
         StateLogic();
     }
@@ -60,12 +70,12 @@ public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescription
         {
             case GamePhases.CannonBallChoosingInfo:
             {
-                    if(!GetComponent<RequestProcessor>().isFiring)
-                    {
-                        GetComponent<RequestProcessor>().RequestFire(cannon);
-                    }
-                    //GetComponent<RequestProcessor>().isFiring = false;
-                    break;
+                if(!processor.isFiring)
+                {
+                    processor.RequestFire();
+                }
+                //GetComponent<RequestProcessor>().isFiring = false;
+                break;
             }
         }
     }
@@ -80,7 +90,7 @@ public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescription
     public void SetDescription(string newDescription)
     {
         description = newDescription;
-        GetComponent<RequestProcessor>().RequestImage(description, cannon);
+        processor.RequestImage(description);
     }
 
     private string description;
@@ -89,12 +99,11 @@ public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescription
     {
         ChangeState(GamePhases.CannonballGeneration);
 
-        GetComponent<RequestProcessor>().RequestAudioDescription(path, this);
-        //GetComponent<RequestProcessor>().RequestFire(cannon);
+        processor.RequestAudioDescription(path);
     }
 
 
-    private void ImageGenerated()
+    private void ImageGenerated(Sprite sprite)
     {
         ChangeState(GamePhases.CannonBallChoosingInfo);
     }

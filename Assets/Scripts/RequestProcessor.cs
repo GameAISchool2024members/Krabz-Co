@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Diagnostics;
 using UnityEngine;
-
-
 using UnityEngine.Networking;
 
+
+using Debug = UnityEngine.Debug;
 
 public class RequestProcessor : MonoBehaviour
 {
@@ -15,41 +18,35 @@ public class RequestProcessor : MonoBehaviour
     public bool isFiring = false;
 
     // Start is called before the first frame update
-    public void RequestImage(string prompt, IImageReceiver imageReceiver)
+    private void Start()
     {
-        StartCoroutine(GenerateImage(prompt, imageReceiver));
+        // Automatically starts python server
+        ProcessStartInfo start = new ProcessStartInfo();
+        start.FileName = "python";
+        start.Arguments = Application.dataPath + "/Leonardo/server.py --api";
+        start.UseShellExecute = false;
+        start.RedirectStandardOutput = false;
+
+        Process.Start(start);
     }
 
-    public void RequestAudioDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
+    public void RequestImage(string prompt)
     {
-        StartCoroutine(GenerateDescription(path, descriptionReceiver));
+        StartCoroutine(GenerateImage(prompt));
     }
 
-    public void RequestFire(IFireReceiver fireReceiver)
+    public void RequestAudioDescription(string path)
+    {
+        StartCoroutine(GenerateDescription(path));
+    }
+
+    public void RequestFire()
     {
         isFiring = true;
-        StartCoroutine(GenerateFire(fireReceiver));
+        StartCoroutine(GenerateFire());
     }
 
-    public interface IImageReceiver
-    {
-        void SetImage(Sprite sprite);
-
-    }
-
-    public interface IAudioDescriptionReceiver
-    {
-        void SetDescription(string description);
-
-    }
-
-    public interface IFireReceiver
-    {
-        void Fire();
-
-    }
-
-    protected IEnumerator GenerateImage(string prompt, IImageReceiver imageReceiver)
+    protected IEnumerator GenerateImage(string prompt)
     {
        
         string processedPrompt = "{\"prompt\": \"" + prompt + " trapped in a glass ball\"}";
@@ -61,7 +58,7 @@ public class RequestProcessor : MonoBehaviour
         
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
-            imageReceiver.SetImage(null);
+            EventManager.ImageGenerated(null);
             Debug.LogError("Error: " + request.error);
 
         }
@@ -80,14 +77,14 @@ public class RequestProcessor : MonoBehaviour
                 else
                 {
                     Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-                    imageReceiver.SetImage(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
+                    EventManager.ImageGenerated(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
                 }
             }
         }
     }
 
 
-    protected IEnumerator GenerateDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
+    protected IEnumerator GenerateDescription(string path)
     {
         string processedPrompt = "{\"file\": \"" + path + "\"}";
 
@@ -102,13 +99,11 @@ public class RequestProcessor : MonoBehaviour
         }
         else
         {
-            Debug.Log("Response: " + request.downloadHandler.text);
-
-            descriptionReceiver.SetDescription(request.downloadHandler.text);
+            EventManager.AudioDescriptionProcess(request.downloadHandler.text);
         }
     }
 
-    protected IEnumerator GenerateFire(IFireReceiver fireReceiver)
+    protected IEnumerator GenerateFire()
     {
         while (isFiring)
         {
@@ -125,9 +120,7 @@ public class RequestProcessor : MonoBehaviour
             }
             else
             {
-                Debug.Log("Response: " + request.downloadHandler.text);
-
-                fireReceiver.Fire();
+                EventManager.Fire();
             }
         }
     }

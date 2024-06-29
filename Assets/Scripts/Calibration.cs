@@ -8,8 +8,8 @@ public class Calibration : MonoBehaviour
 {
     public static Calibration Instance;
 
-   
 
+    public bool CameraIsOn;
     // Reference to the PoseLandmarkListAnnotation component
     public PoseLandmarkListAnnotation poseLandmarkListAnnotation;
 
@@ -86,12 +86,14 @@ public class Calibration : MonoBehaviour
 
                     leftHandToShoulderDistance_baseline = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
                     rightHandToShoulderDistance_baseline = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
+                    
+                }
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    CameraIsOn = false;
                     DontDestroyOnLoad(gameObject);
                     SceneManager.LoadScene("Game");
                 }
-
-
-
 
             }
 

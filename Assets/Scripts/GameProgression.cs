@@ -47,7 +47,7 @@ public class GameProgression : MonoBehaviour
                 break;
             case GamePhases.CannonBallChoosingInfo:
             {
-                if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+                if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button0))
                 {
                     ChangeState(GamePhases.CannonballSpeaking);
                     EventManager.StartRecording();

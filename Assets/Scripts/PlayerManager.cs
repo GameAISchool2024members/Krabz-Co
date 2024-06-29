@@ -5,7 +5,7 @@ using Mediapipe.Unity;
 
 public class PlayerManager : MonoBehaviour
 {
-    
+    public bool CameraIsOn;
     // Reference to the cube you want to move
     public Transform Player;
     public GameObject cannon;
@@ -25,6 +25,9 @@ public class PlayerManager : MonoBehaviour
     public float scalingFactor = 0.1f;
     public float Z_MidPointShoulders;
     public Vector3 positionOffset; // Offsets to adjust the shoulder position if needed
+    public float movementSpeed = 5.0f;
+    public int tiltStep = 1; // Step to increase/decrease the tilt value
+
 
     private const int leftShoulderIndex = 11;
     private const int rightShoulderIndex = 12;
@@ -48,8 +51,16 @@ public class PlayerManager : MonoBehaviour
 
     public float distanceThreshold;
     public float baselineDistance;
+
+    private int currentTiltValue = 1; // Initialize the tilt counter
+    private float tiltCooldown = 0.2f; // Cooldown time to prevent rapid changes
+    private float nextTiltChangeTime = 0f; // Next allowed time to change tilt
+
+
+
     void Start()
     {
+        CameraIsOn = Calibration.Instance.CameraIsOn;
         cannonComponent = cannon.GetComponent<CannonComponent>();
         aimingComponent = cannon.GetComponent<AimingComponent>();
 
@@ -75,73 +86,127 @@ public class PlayerManager : MonoBehaviour
         {
             cannonComponent.Fire();
         }
-        // Ensure that pose landmarks are available
-        if (poseLandmarkListAnnotation != null)
+        if (CameraIsOn)
         {
-            // Get the landmarks
-            var leftShoulder = poseLandmarkListAnnotation[leftShoulderIndex];
-            var rightShoulder = poseLandmarkListAnnotation[rightShoulderIndex];
-
-            var leftHand = poseLandmarkListAnnotation[leftHandIndex];
-            var rightHand = poseLandmarkListAnnotation[rightHandIndex];
-
-            if (leftShoulder != null && rightShoulder != null && leftHand != null && rightHand != null)
+            // Ensure that pose landmarks are available
+            if (poseLandmarkListAnnotation != null)
             {
-                // Calculate the midpoint between the shoulders
-                Vector3 shoulderMidpoint = (leftShoulder.transform.position + rightShoulder.transform.position) / 2.0f;
+                // Get the landmarks
+                var leftShoulder = poseLandmarkListAnnotation[leftShoulderIndex];
+                var rightShoulder = poseLandmarkListAnnotation[rightShoulderIndex];
 
-                // Scale down the movement
-                shoulderMidpoint *= scalingFactor;
+                var leftHand = poseLandmarkListAnnotation[leftHandIndex];
+                var rightHand = poseLandmarkListAnnotation[rightHandIndex];
 
-                // Apply offset if needed
-                shoulderMidpoint += positionOffset;
-
-                // Update the X position to match the shoulder midpoint X position
-                Vector3 currentPosition = Player.position;
-                currentPosition.x = shoulderMidpoint.x;
-                Z_MidPointShoulders = shoulderMidpoint.z;
-                // Keep the Y and Z positions locked
-                currentPosition.y = lockedY;
-                currentPosition.z = lockedZ;
-
-                // Clamp the position within screen bounds
-                currentPosition = ClampToScreenBounds(currentPosition);
-
-                // Apply the new position to the cube
-                Player.position = currentPosition;
-
-
-
-                // Calculate the current distance from the baseline
-                if (baselineSet_MidShoulders)
+                if (leftShoulder != null && rightShoulder != null && leftHand != null && rightHand != null)
                 {
-                    //// Calculate distances between hands and shoulders
-                    leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
-                    rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
-   
-                    if (baseline_shoulder_midpoint - shoulderMidpoint.z > Threshold_Landmark_ShouldersZ && 
-                        leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
-                    {
-                        // Logic to handle when the distance exceeds the threshold
-                        Threshold_Landmark_MidShoulder = true;
-                        aimingComponent.CurrentTilt = 0;
-                    }
-                    else if(baseline_shoulder_midpoint - shoulderMidpoint.z <= Threshold_Landmark_ShouldersZ &&
-                        leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
-                    {
-                        Threshold_Landmark_MidShoulder = true;
-                        aimingComponent.CurrentTilt = 2;
-                    }
-                    else
-                    {
-                        Threshold_Landmark_MidShoulder = false;
-                        aimingComponent.CurrentTilt = 1;
-                        
-                    }
-                }
+                    // Calculate the midpoint between the shoulders
+                    Vector3 shoulderMidpoint = (leftShoulder.transform.position + rightShoulder.transform.position) / 2.0f;
 
+                    // Scale down the movement
+                    shoulderMidpoint *= scalingFactor;
+
+                    // Apply offset if needed
+                    shoulderMidpoint += positionOffset;
+
+                    // Update the X position to match the shoulder midpoint X position
+                    Vector3 currentPosition = Player.position;
+                    currentPosition.x = shoulderMidpoint.x;
+                    Z_MidPointShoulders = shoulderMidpoint.z;
+                    // Keep the Y and Z positions locked
+                    currentPosition.y = lockedY;
+                    currentPosition.z = lockedZ;
+
+                    // Clamp the position within screen bounds
+                    currentPosition = ClampToScreenBounds(currentPosition);
+
+                    // Apply the new position to the cube
+                    Player.position = currentPosition;
+
+
+
+                    // Calculate the current distance from the baseline
+                    if (baselineSet_MidShoulders)
+                    {
+                        //// Calculate distances between hands and shoulders
+                        leftHandToShoulderDistance = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
+                        rightHandToShoulderDistance = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
+
+                        if (baseline_shoulder_midpoint - shoulderMidpoint.z > Threshold_Landmark_ShouldersZ &&
+                            leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
+                        {
+                            // Logic to handle when the distance exceeds the threshold
+                            Threshold_Landmark_MidShoulder = true;
+                            aimingComponent.CurrentTilt = 0;
+                        }
+                        else if (baseline_shoulder_midpoint - shoulderMidpoint.z <= Threshold_Landmark_ShouldersZ &&
+                            leftHandToShoulderDistance_baseline * .9 > leftHandToShoulderDistance && rightHandToShoulderDistance_baseline * .9 > rightHandToShoulderDistance)
+                        {
+                            Threshold_Landmark_MidShoulder = true;
+                            aimingComponent.CurrentTilt = 2;
+                        }
+                        else
+                        {
+                            Threshold_Landmark_MidShoulder = false;
+                            aimingComponent.CurrentTilt = 1;
+
+                        }
+                    }
+
+                }
             }
         }
+        else
+        {
+            HandleKeyboardMovement();
+        }
+        void HandleKeyboardMovement()
+        {
+            // Get the current position
+            Vector3 currentPosition = Player.position;
+
+            // Check for horizontal input (A/D or Left/Right arrow keys)
+            float horizontalInput = Input.GetAxis("Horizontal");
+
+            // Update the X position based on the horizontal input
+            currentPosition.x += horizontalInput * movementSpeed * Time.deltaTime;
+
+            // Keep the Y and Z positions locked
+            currentPosition.y = lockedY;
+            currentPosition.z = lockedZ;
+
+            // Clamp the position within screen bounds
+            currentPosition = ClampToScreenBounds(currentPosition);
+
+            // Apply the new position to the player
+            Player.position = currentPosition;
+
+            // Check for vertical input (W/S or Up/Down arrow keys)
+            float verticalInput = Input.GetAxis("Vertical");
+
+
+            // Update the tilt value based on vertical input with cooldown to prevent rapid changes
+            if (Time.time >= nextTiltChangeTime)
+            {
+                if (verticalInput > 0)
+                {
+                    currentTiltValue += tiltStep;
+                    nextTiltChangeTime = Time.time + tiltCooldown;
+                }
+                else if (verticalInput < 0)
+                {
+                    currentTiltValue -= tiltStep;
+                    nextTiltChangeTime = Time.time + tiltCooldown;
+                }
+            }
+
+            // Clamp the tilt value between 0 and 2
+            currentTiltValue = Mathf.Clamp(currentTiltValue, 0, 2);
+
+            // Update the aiming component's tilt
+            aimingComponent.CurrentTilt = currentTiltValue;
+        }
+
     }
 
     // Method to clamp the position within screen bounds

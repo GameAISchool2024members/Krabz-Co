@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
+public class GameProgression : MonoBehaviour, RequestProcessor.IAudioDescriptionReceiver
 {
     public GamePhases GamePhase ;
     public CannonComponent cannon;
@@ -60,12 +60,12 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
         {
             case GamePhases.CannonBallChoosingInfo:
             {
-                    if(!GetComponent<Leonardo>().isFiring)
+                    if(!GetComponent<RequestProcessor>().isFiring)
                     {
-                        GetComponent<Leonardo>().RequestFire(cannon);
+                        GetComponent<RequestProcessor>().RequestFire(cannon);
                     }
-                    //GetComponent<Leonardo>().isFiring = false;
-                break;
+                    //GetComponent<RequestProcessor>().isFiring = false;
+                    break;
             }
         }
     }
@@ -80,7 +80,7 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     public void SetDescription(string newDescription)
     {
         description = newDescription;
-        GetComponent<Leonardo>().RequestImage(description, cannon);
+        GetComponent<RequestProcessor>().RequestImage(description, cannon);
     }
 
     private string description;
@@ -89,8 +89,8 @@ public class GameProgression : MonoBehaviour, Leonardo.IAudioDescriptionReceiver
     {
         ChangeState(GamePhases.CannonballGeneration);
 
-        GetComponent<Leonardo>().RequestAudioDescription(path, this);
-        //GetComponent<Leonardo>().RequestFire(cannon);
+        GetComponent<RequestProcessor>().RequestAudioDescription(path, this);
+        //GetComponent<RequestProcessor>().RequestFire(cannon);
     }
 
 

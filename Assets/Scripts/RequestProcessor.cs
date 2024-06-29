@@ -6,11 +6,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Leonardo : MonoBehaviour
+public class RequestProcessor : MonoBehaviour
 {
-    private string url = "http://localhost:8008/get_image";
-    private string audioUrl = "http://localhost:8008/transcribe";
-    private string fireUrl = "http://localhost:8008/listen";
+    private static string imageUrl = "http://localhost:8008/get_image";
+    private static string audioUrl = "http://localhost:8008/transcribe";
+    private static string fireUrl = "http://localhost:8008/listen";
 
     public bool isFiring = false;
 
@@ -49,24 +49,12 @@ public class Leonardo : MonoBehaviour
 
     }
 
-    public IEnumerator GenerateImage(string prompt, IImageReceiver imageReceiver)
+    protected IEnumerator GenerateImage(string prompt, IImageReceiver imageReceiver)
     {
        
-        string processed_prompt = "{\"prompt\": \"" + prompt + " trapped in a glass ball\"}";
+        string processedPrompt = "{\"prompt\": \"" + prompt + " trapped in a glass ball\"}";
 
-        Debug.Log(processed_prompt);
-        // Create a new UnityWebRequest for a POST request
-        UnityWebRequest request = new UnityWebRequest(url, "POST");
-
-        // Set the request headers
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        // Convert prompt to a byte array
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(processed_prompt);
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-
-        // Create a DownloadHandler to receive the response
-        request.downloadHandler = new DownloadHandlerBuffer();
+        UnityWebRequest request = CreateRequest(imageUrl, processedPrompt);
 
         // Send the request and wait for a response
         yield return request.SendWebRequest();
@@ -99,23 +87,11 @@ public class Leonardo : MonoBehaviour
     }
 
 
-    public IEnumerator GenerateDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
+    protected IEnumerator GenerateDescription(string path, IAudioDescriptionReceiver descriptionReceiver)
     {
-        string processed_prompt = "{\"file\": \"" + path + "\"}";
+        string processedPrompt = "{\"file\": \"" + path + "\"}";
 
-        Debug.Log(processed_prompt);
-        // Create a new UnityWebRequest for a POST request
-        UnityWebRequest request = new UnityWebRequest(audioUrl, "POST");
-
-        // Set the request headers
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        // Convert prompt to a byte array
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(processed_prompt);
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-
-        // Create a DownloadHandler to receive the response
-        request.downloadHandler = new DownloadHandlerBuffer();
+        UnityWebRequest request = CreateRequest(audioUrl, processedPrompt);
 
         // Send the request and wait for a response
         yield return request.SendWebRequest();
@@ -132,25 +108,13 @@ public class Leonardo : MonoBehaviour
         }
     }
 
-    public IEnumerator GenerateFire(IFireReceiver fireReceiver)
+    protected IEnumerator GenerateFire(IFireReceiver fireReceiver)
     {
         while (isFiring)
         {
-            string processed_prompt = "{}";
+            string processedPrompt = "{}";
 
-            Debug.Log(processed_prompt);
-            // Create a new UnityWebRequest for a POST request
-            UnityWebRequest request = new UnityWebRequest(fireUrl, "POST");
-
-            // Set the request headers
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            // Convert prompt to a byte array
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(processed_prompt);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-
-            // Create a DownloadHandler to receive the response
-            request.downloadHandler = new DownloadHandlerBuffer();
+            UnityWebRequest request = CreateRequest(fireUrl, processedPrompt);
 
             // Send the request and wait for a response
             yield return request.SendWebRequest();
@@ -166,6 +130,24 @@ public class Leonardo : MonoBehaviour
                 fireReceiver.Fire();
             }
         }
-        
+    }
+
+    protected UnityWebRequest CreateRequest(string url, string body)
+    {
+        Debug.Log("Body: " + body);
+        // Create a new UnityWebRequest for a POST request
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+
+        // Set the request headers
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Convert prompt to a byte array
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(body);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+
+        // Create a DownloadHandler to receive the response
+        request.downloadHandler = new DownloadHandlerBuffer();
+
+        return request;
     }
 }

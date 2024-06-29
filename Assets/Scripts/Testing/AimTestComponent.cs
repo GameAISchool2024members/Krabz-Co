@@ -19,7 +19,7 @@ public class AimTestComponent : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<Leonardo>().RequestImage("Furry lobster", cannon);
+            GetComponent<RequestProcessor>().RequestImage("Furry lobster", cannon);
         }
 
         if (Input.GetKeyDown(KeyCode.JoystickButton0))

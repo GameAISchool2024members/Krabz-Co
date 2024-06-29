@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(AimingComponent))]
-public class CannonComponent : MonoBehaviour, Leonardo.IImageReceiver, Leonardo.IFireReceiver
+public class CannonComponent : MonoBehaviour, RequestProcessor.IImageReceiver, RequestProcessor.IFireReceiver
 {
     public bool CanFire
     {

@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: f2973b357a38905429b7ed8c0034c124
+guid: 3d0a22da1d6c79d44b4c926c21b58992
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 13
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -94,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Seagull_0
+      name: CrabExplosion_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
-        width: 456
-        height: 384
+        y: 369
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62cedd0cbc9a7bf44811012444ff07b2
-      internalID: -792272027
+      spriteID: d9ba7315c49a4434993be0c491e5c670
+      internalID: 1914597521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull_1
+      name: CrabExplosion_1
       rect:
         serializedVersion: 2
-        x: 456
-        y: 384
-        width: 456
-        height: 384
+        x: 197
+        y: 369
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 330bea954035688478a9f7e9b019757d
-      internalID: 2057472571
+      spriteID: a2e4ed28f595e8e4b9f3a399a0aa462b
+      internalID: 40830032
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull_2
+      name: CrabExplosion_2
       rect:
         serializedVersion: 2
-        x: 912
-        y: 384
-        width: 456
-        height: 384
+        x: 394
+        y: 369
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb372691ad289040927b52802f928be
-      internalID: 198542262
+      spriteID: 5c30787b5d84f4646910da6cb48cb5bd
+      internalID: -47139615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull_3
+      name: CrabExplosion_3
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 369
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b3ac8b2109e5f347bf8ed0885324f9a
+      internalID: -130941235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 456
-        height: 384
+        y: 185
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a4f05567da35f74a975ac23cf8115c9
-      internalID: -403374220
+      spriteID: 4c0993e81b0573147bada6f2c5f4397e
+      internalID: -1021783710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull_4
+      name: CrabExplosion_5
       rect:
         serializedVersion: 2
-        x: 456
-        y: 0
-        width: 456
-        height: 384
+        x: 197
+        y: 185
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5ef4657b47dee04983728b571df7eab
-      internalID: -1656093045
+      spriteID: a1f9fef156380c44f84bc9f5ba620023
+      internalID: -1683074465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull_5
+      name: CrabExplosion_6
       rect:
         serializedVersion: 2
-        x: 912
-        y: 0
-        width: 456
-        height: 384
+        x: 394
+        y: 185
+        width: 197
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +250,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30475703d4e3bf94fb1159ec6b0621a7
-      internalID: 1932129679
+      spriteID: a5a57ad5e0ba38643af567472a9970ec
+      internalID: 202683169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_7
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 185
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: def8a59adbaaf36409b3e26bd4b79a99
+      internalID: -821945111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e55518767af21f340a048339e9b7d559
+      internalID: 772868983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_9
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 1
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5484d120f6a3634991e102b88fa9271
+      internalID: -414213510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_10
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 1
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e016c721b1b514842a170b21a0249f6c
+      internalID: -1591898523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrabExplosion_11
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 1
+        width: 197
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3650845692a8f74ea936b63cd832ed6
+      internalID: 195004846
       vertices: []
       indices: 
       edges: []
@@ -246,12 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Seagull_0: -792272027
-      Seagull_1: 2057472571
-      Seagull_2: 198542262
-      Seagull_3: -403374220
-      Seagull_4: -1656093045
-      Seagull_5: 1932129679
+      CrabExplosion_0: 1914597521
+      CrabExplosion_1: 40830032
+      CrabExplosion_10: -1591898523
+      CrabExplosion_11: 195004846
+      CrabExplosion_2: -47139615
+      CrabExplosion_3: -130941235
+      CrabExplosion_4: -1021783710
+      CrabExplosion_5: -1683074465
+      CrabExplosion_6: 202683169
+      CrabExplosion_7: -821945111
+      CrabExplosion_8: 772868983
+      CrabExplosion_9: -414213510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

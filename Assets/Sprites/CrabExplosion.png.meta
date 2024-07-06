@@ -113,12 +113,12 @@ TextureImporter:
       name: CrabExplosion_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 369
-        width: 197
-        height: 184
+        x: 98
+        y: 1116
+        width: 301
+        height: 237
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: CrabExplosion_1
       rect:
         serializedVersion: 2
-        x: 197
-        y: 369
-        width: 197
-        height: 184
+        x: 560
+        y: 1089
+        width: 341
+        height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: CrabExplosion_2
       rect:
         serializedVersion: 2
-        x: 394
-        y: 369
-        width: 197
-        height: 184
+        x: 1063
+        y: 1082
+        width: 361
+        height: 301
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: CrabExplosion_3
       rect:
         serializedVersion: 2
-        x: 591
-        y: 369
-        width: 197
-        height: 184
+        x: 1551
+        y: 1067
+        width: 378
+        height: 316
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: CrabExplosion_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 185
-        width: 197
-        height: 184
+        x: 45
+        y: 552
+        width: 415
+        height: 347
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: CrabExplosion_5
       rect:
         serializedVersion: 2
-        x: 197
-        y: 185
-        width: 197
-        height: 184
+        x: 522
+        y: 545
+        width: 447
+        height: 365
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: CrabExplosion_6
       rect:
         serializedVersion: 2
-        x: 394
-        y: 185
-        width: 197
-        height: 184
+        x: 1009
+        y: 537
+        width: 466
+        height: 392
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: CrabExplosion_7
       rect:
         serializedVersion: 2
-        x: 591
-        y: 185
-        width: 197
-        height: 184
+        x: 1497
+        y: 530
+        width: 469
+        height: 390
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -282,11 +282,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 197
-        height: 184
+        y: 22
+        width: 495
+        height: 392
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: CrabExplosion_9
       rect:
         serializedVersion: 2
-        x: 197
-        y: 1
-        width: 197
-        height: 184
+        x: 501
+        y: 6
+        width: 494
+        height: 444
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,12 +323,12 @@ TextureImporter:
       name: CrabExplosion_10
       rect:
         serializedVersion: 2
-        x: 394
-        y: 1
-        width: 197
-        height: 184
+        x: 1000
+        y: 0
+        width: 488
+        height: 482
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -344,12 +344,12 @@ TextureImporter:
       name: CrabExplosion_11
       rect:
         serializedVersion: 2
-        x: 591
-        y: 1
-        width: 197
-        height: 184
+        x: 1492
+        y: 0
+        width: 486
+        height: 483
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

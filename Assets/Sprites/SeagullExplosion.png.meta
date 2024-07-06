@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37a4d3bd03d44ef4d9cddb5b8e483570
+guid: fabf5e6b38bc0de4b8a455fae40e74ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,19 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Seagull 1_0
+      name: SeagullExplosion_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
-        width: 456
-        height: 384
+        x: 58
+        y: 1345
+        width: 476
+        height: 382
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c87a7cbd875386c4c9abaa32500db568
-      internalID: -959410963
+      spriteID: 30a2d9247a81a2d43935f29e7c436308
+      internalID: 897540144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull 1_1
+      name: SeagullExplosion_1
       rect:
         serializedVersion: 2
-        x: 456
-        y: 384
-        width: 456
-        height: 384
+        x: 649
+        y: 1315
+        width: 491
+        height: 428
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edb47b25417f78c499eeef6e4149dbc9
-      internalID: -1705961853
+      spriteID: d00104f246c432946a4f78358bece743
+      internalID: 855154363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull 1_2
+      name: SeagullExplosion_2
       rect:
         serializedVersion: 2
-        x: 912
-        y: 384
-        width: 456
-        height: 384
+        x: 1253
+        y: 1283
+        width: 484
+        height: 502
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3781921fdc27c4496428b05c303106
-      internalID: 1150004188
+      spriteID: 6edd481bc8f3b1c48a82817e78af5d41
+      internalID: -300166291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull 1_3
+      name: SeagullExplosion_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 456
-        height: 384
+        x: 1823
+        y: 1252
+        width: 524
+        height: 533
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52f193338a6b2fc4d824c4af284fe713
-      internalID: -1407291046
+      spriteID: ca6b2befc11b5b241bdc433deab6044b
+      internalID: 826153843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull 1_4
+      name: SeagullExplosion_4
       rect:
         serializedVersion: 2
-        x: 456
-        y: 0
-        width: 456
-        height: 384
+        x: 46
+        y: 638
+        width: 498
+        height: 501
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c54d74054699fa645bdedbaf02227ea5
-      internalID: 1614911833
+      spriteID: 4f223050ddda95e4eae84ecfa92ffe96
+      internalID: -468578347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Seagull 1_5
+      name: SeagullExplosion_5
       rect:
         serializedVersion: 2
-        x: 912
-        y: 0
-        width: 456
-        height: 384
+        x: 646
+        y: 618
+        width: 502
+        height: 538
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,8 +229,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48e730cc1c26cc844b0af6841fcc7fd2
-      internalID: -1742594448
+      spriteID: 3a4adec6b0fc33e40a6ee11bcc474973
+      internalID: -962760960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_6
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 620
+        width: 525
+        height: 549
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afae001ef3ad2a144b3351d7fe8e3412
+      internalID: 1025620502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_7
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 618
+        width: 525
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d66f232153a1d4ca1e4d2eba315b45
+      internalID: -1660255318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_8
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 46
+        width: 525
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8047ad12ffa8fa49866200650e70ad2
+      internalID: -170942500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_9
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 31
+        width: 496
+        height: 498
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8e165080e7f2824d872d02122d25df5
+      internalID: 1454458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_10
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 23
+        width: 502
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f1bd120bf0c5d84b97e3c9dab3ab5f1
+      internalID: -1505365757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeagullExplosion_11
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 53
+        width: 494
+        height: 483
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a423bb8642ad2a439dd5a4ad9d161ee
+      internalID: 396846491
       vertices: []
       indices: 
       edges: []
@@ -259,12 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Seagull 1_0: -959410963
-      Seagull 1_1: -1705961853
-      Seagull 1_2: 1150004188
-      Seagull 1_3: -1407291046
-      Seagull 1_4: 1614911833
-      Seagull 1_5: -1742594448
+      SeagullExplosion_0: 897540144
+      SeagullExplosion_1: 855154363
+      SeagullExplosion_10: -1505365757
+      SeagullExplosion_11: 396846491
+      SeagullExplosion_2: -300166291
+      SeagullExplosion_3: 826153843
+      SeagullExplosion_4: -468578347
+      SeagullExplosion_5: -962760960
+      SeagullExplosion_6: 1025620502
+      SeagullExplosion_7: -1660255318
+      SeagullExplosion_8: -170942500
+      SeagullExplosion_9: 1454458
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

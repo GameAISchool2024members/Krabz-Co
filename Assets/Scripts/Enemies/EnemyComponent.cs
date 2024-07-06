@@ -6,10 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class EnemyComponent : MonoBehaviour
 {
+    private Animator animator;
+    private NPCMovement movement;
+
+    private void Start()
+    {
+        movement = GetComponent<NPCMovement>();
+        animator = GetComponent<Animator>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        Object.Destroy(gameObject);
+        movement.enabled = false;
+        animator.SetTrigger("IsDead");
     }
 
 }

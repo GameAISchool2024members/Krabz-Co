@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 139326cee9ea641409e82097b912410b
+guid: 37a4d3bd03d44ef4d9cddb5b8e483570
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crab_0
+      name: Seagull 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 683
-        width: 273
-        height: 211
+        y: 384
+        width: 340
+        height: 302
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 326eb09f6e176a34586b35927c8e4159
-      internalID: 1720787663
+      spriteID: c87a7cbd875386c4c9abaa32500db568
+      internalID: -959410963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_1
+      name: Seagull 1_1
       rect:
         serializedVersion: 2
-        x: 341
-        y: 682
-        width: 301
-        height: 215
+        x: 458
+        y: 384
+        width: 340
+        height: 302
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,62 +158,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c31e551e0b6dc684b8d9f72610b3fd30
-      internalID: -827109414
+      spriteID: edb47b25417f78c499eeef6e4149dbc9
+      internalID: -1705961853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_2
+      name: Seagull 1_2
       rect:
         serializedVersion: 2
-        x: 682
-        y: 683
-        width: 280
-        height: 195
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 912
+        y: 384
+        width: 340
+        height: 302
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d5d87b9f55af41479eb725bc06f203e
-      internalID: 422724744
+      spriteID: ce3781921fdc27c4496428b05c303106
+      internalID: 1150004188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_3
+      name: Seagull 1_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 342
-        width: 258
-        height: 227
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 0
+        width: 340
+        height: 302
+      alignment: 9
+      pivot: {x: 0.5, y: 0.85}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 177ea501f3db1074495bea041259ea84
-      internalID: 2111860247
+      spriteID: 52f193338a6b2fc4d824c4af284fe713
+      internalID: -1407291046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_4
+      name: Seagull 1_4
       rect:
         serializedVersion: 2
-        x: 341
-        y: 342
-        width: 282
-        height: 231
+        x: 456
+        y: 0
+        width: 340
+        height: 302
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 406b187a2b0bd0346b74e99330989acb
-      internalID: -437119205
+      spriteID: c54d74054699fa645bdedbaf02227ea5
+      internalID: 1614911833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crab_5
+      name: Seagull 1_5
       rect:
         serializedVersion: 2
-        x: 682
-        y: 342
-        width: 299
-        height: 232
+        x: 912
+        y: 0
+        width: 340
+        height: 302
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,71 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb0a9b476c8cd434abce6b0aa20f629e
-      internalID: -1741442254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crab_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 243
-        height: 193
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52eca5c40d0623f4eb88f20881c4ef1c
-      internalID: -1965233281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crab_7
-      rect:
-        serializedVersion: 2
-        x: 341
-        y: 1
-        width: 289
-        height: 204
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5cd0eb38417a104da2383267a2c63ba
-      internalID: -2134331198
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crab_8
-      rect:
-        serializedVersion: 2
-        x: 683
-        y: 1
-        width: 279
-        height: 209
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3c62e302dea84c4aa47900bf095e833
-      internalID: 608945710
+      spriteID: 48e730cc1c26cc844b0af6841fcc7fd2
+      internalID: -1742594448
       vertices: []
       indices: 
       edges: []
@@ -322,15 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Crab_0: 1720787663
-      Crab_1: -827109414
-      Crab_2: 422724744
-      Crab_3: 2111860247
-      Crab_4: -437119205
-      Crab_5: -1741442254
-      Crab_6: -1965233281
-      Crab_7: -2134331198
-      Crab_8: 608945710
+      Seagull 1_0: -959410963
+      Seagull 1_1: -1705961853
+      Seagull 1_2: 1150004188
+      Seagull 1_3: -1407291046
+      Seagull 1_4: 1614911833
+      Seagull 1_5: -1742594448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

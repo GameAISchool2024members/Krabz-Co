@@ -904,7 +904,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &293190278
@@ -2937,6 +2937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f349a6663f7d940aaa5fe1dc266474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraIsOn: 0
   Player: {fileID: 1980009636}
   cannon: {fileID: 698187890}
   lockedY: 0
@@ -2945,6 +2946,8 @@ MonoBehaviour:
   scalingFactor: 0.1
   Z_MidPointShoulders: 0
   positionOffset: {x: 0, y: 0, z: 0}
+  movementSpeed: 5
+  tiltStep: 1
   leftHandToShoulderDistance_baseline: 0
   rightHandToShoulderDistance_baseline: 0
   leftHandToShoulderDistance: 0

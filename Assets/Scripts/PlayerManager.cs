@@ -60,9 +60,10 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        CameraIsOn = Calibration.Instance.CameraIsOn;
         cannonComponent = cannon.GetComponent<CannonComponent>();
         aimingComponent = cannon.GetComponent<AimingComponent>();
+
+        CameraIsOn = Calibration.Instance.CameraIsOn;
 
         // Initialize the locked Y and Z values if not set in the Inspector
         lockedY = Player.position.y;

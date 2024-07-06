@@ -86,7 +86,11 @@ public class Calibration : MonoBehaviour
 
                     leftHandToShoulderDistance_baseline = Vector3.Distance(leftHand.transform.position, leftShoulder.transform.position);
                     rightHandToShoulderDistance_baseline = Vector3.Distance(rightHand.transform.position, rightShoulder.transform.position);
-                    
+
+                    CameraIsOn = true;
+                    DontDestroyOnLoad(gameObject);
+                    SceneManager.LoadScene("Game");
+
                 }
                 if (Input.GetKeyDown(KeyCode.N))
                 {
@@ -94,6 +98,8 @@ public class Calibration : MonoBehaviour
                     DontDestroyOnLoad(gameObject);
                     SceneManager.LoadScene("Game");
                 }
+
+                
 
             }
 

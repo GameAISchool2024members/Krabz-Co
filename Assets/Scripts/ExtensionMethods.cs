@@ -7,12 +7,7 @@ public static class ExtensionMethod
     {
         CannonBallComponent cannonBall = GameObject.Instantiate<CannonBallComponent>(thisObj, new Vector3(0, 0, 0), Quaternion.identity);
         cannonBall.SplineData = splineData;
-        cannonBall.gameObject.transform.localScale *= ballTexture ? 1.5f : 0.8f;
-
-        if(ballTexture)
-        {
-            cannonBall.BallRenderer.sprite = ballTexture;
-        }
+        cannonBall.SetBallSprite(ballTexture);
 
         return cannonBall;
     }

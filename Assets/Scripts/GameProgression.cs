@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,10 @@ public class GameProgression : MonoBehaviour
 
     private RequestProcessor processor;
 
+    private string description;
+
+    private BallRater.Rate rate;
+
     private void Start()
     {
         processor = GetComponent<RequestProcessor>();
@@ -24,6 +29,7 @@ public class GameProgression : MonoBehaviour
         EventManager.OnImageGenerated += ImageGenerated;
         EventManager.OnScorePoint += ChangeScore;
         EventManager.OnAudioDescriptionProcessed += SetDescription;
+        EventManager.OnBallRated += BallRated;
     }
 
     private void OnDisable()
@@ -32,6 +38,8 @@ public class GameProgression : MonoBehaviour
         EventManager.OnImageGenerated -= ImageGenerated;
         EventManager.OnScorePoint -= ChangeScore;
         EventManager.OnAudioDescriptionProcessed -= SetDescription;
+        EventManager.OnBallRated -= BallRated;
+
     }
 
     private void Update()
@@ -93,7 +101,10 @@ public class GameProgression : MonoBehaviour
         processor.RequestImage(description);
     }
 
-    private string description;
+    private void BallRated(BallRater.Rate newRate)
+    {
+        rate = newRate;
+    }
     
     private void RecordingComplete(string path)
     {
@@ -108,10 +119,9 @@ public class GameProgression : MonoBehaviour
         ChangeState(GamePhases.CannonBallChoosingInfo);
     }
 
-    private void ChangeScore(int points)
+    private void ChangeScore(int points, bool isSpecial)
     {
-        score += points;
-        Debug.Log("Score: " + score);
+        score += (isSpecial && rate != null) ? (int)Math.Round(points * rate.multiplier, 0) : points;
         scoreText.text = score.ToString();
     }
 }

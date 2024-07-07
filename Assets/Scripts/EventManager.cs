@@ -4,7 +4,8 @@ public class EventManager : MonoBehaviour
 {
     public delegate void EventHandler();
     public delegate void TextEventHandler(string text);
-    public delegate void ScorePointHandler(int points);
+    public delegate void ScorePointHandler(int points, bool isSpecial);
+    public delegate void RateHandler(BallRater.Rate rate);
     public delegate void ImageGenerationHandler(Sprite sprite);
 
     public static event EventHandler OnStartRecording;
@@ -13,6 +14,7 @@ public class EventManager : MonoBehaviour
     public static event TextEventHandler OnAudioDescriptionProcessed;
     public static event EventHandler OnFire;
     public static event ScorePointHandler OnScorePoint;
+    public static event RateHandler OnBallRated;
 
     public static void StartRecording()
     {
@@ -38,10 +40,16 @@ public class EventManager : MonoBehaviour
         OnAudioDescriptionProcessed?.Invoke(audioDescription);
     }
 
-    public static void ScorePoint(int points)
+    public static void ScorePoint(int points, bool isSpecial)
     {
         Debug.Log("EventManager: Score Point event triggered");
-        OnScorePoint?.Invoke(points);
+        OnScorePoint?.Invoke(points, isSpecial);
+    }
+
+    public static void CompleteBallRating(BallRater.Rate rate)
+    {
+        Debug.Log("EventManager: Complete Ball Rating triggered");
+        OnBallRated?.Invoke(rate);
     }
 
     public static void Fire()

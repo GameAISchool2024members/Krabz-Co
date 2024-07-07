@@ -2,44 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LLMUnity;
-    
+
 public class BallRater : MonoBehaviour
 {
-    public LLM llm;
-    private string model_output;
-    private bool completed = false;
-
-    void Start()
+    public class Rate
     {
-        //RateCannonBall("turtle");
+        public Rate(float newMultiplier, string newDescription)
+        {
+            multiplier = newMultiplier;
+            description = newDescription;
+        }
+
+        public float multiplier;
+
+        public string description;
     }
-    
+
+    public LLM llm;
+    private string modelOutput;
+
+    private void OnEnable()
+    {
+        EventManager.OnAudioDescriptionProcessed += RateCannonBall;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnAudioDescriptionProcessed -= RateCannonBall;
+    }
+
     void HandleReply(string reply)
     {
-        model_output = reply;
+        modelOutput = reply;
     }
     
     void ReplyCompleted()
     {
-        completed = true;
-        Debug.Log(model_output);
-        //Debug.Log("Finished");
+        modelOutput = modelOutput.Trim('\"');
+        string[] processedOutput = modelOutput.Split("--");
+
+        if(processedOutput.Length == 2)
+        {
+            float multiplier = 1 + (float.Parse(processedOutput[0]) / 10);
+            EventManager.CompleteBallRating(new Rate(multiplier, processedOutput[1]));
+        }
     }
     
     public void RateCannonBall(string cannonball)
     {
-        //Debug.Log("Start");
-        completed = false;
-        var test = llm.Chat(cannonball, HandleReply,ReplyCompleted);
-    }
-    
-    // get the current output of the LLM, if the LLM is still generating this will log a warning
-    public string GetOutput()
-    {
-        if (!completed)
-        {
-            Debug.LogWarning("Called GetOutput while model was still running");
-        }
-        return model_output;
+        var test = llm.Chat(cannonball, HandleReply, ReplyCompleted);
     }
 }

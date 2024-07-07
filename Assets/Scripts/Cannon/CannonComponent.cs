@@ -18,9 +18,6 @@ public class CannonComponent : MonoBehaviour
     private CannonBallComponent cannonPrefab;
 
     [SerializeField]
-    private Sprite defaultImage;
-
-    [SerializeField]
     private AudioClip cannonBallReadySound;
 
     private AudioSource audioSource;

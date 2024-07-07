@@ -6,8 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class EnemyComponent : MonoBehaviour
 {
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+    }
+
     private Animator animator;
     private NPCMovement movement;
+
+    [MinAttribute(1)]
+    [SerializeField]
+    private int score = 10;
 
     private void Start()
     {
@@ -21,5 +33,4 @@ public class EnemyComponent : MonoBehaviour
         movement.enabled = false;
         animator.SetTrigger("IsDead");
     }
-
 }

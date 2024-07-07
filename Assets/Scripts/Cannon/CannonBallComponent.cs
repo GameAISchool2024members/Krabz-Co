@@ -7,15 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CannonBallComponent : MonoBehaviour
 {
-
-    public SpriteRenderer BallRenderer
-    {
-        get
-        {
-            return ballRenderer;
-        }
-    }
-
     public AimingComponent.SplineData SplineData
     {
         set
@@ -38,7 +29,19 @@ public class CannonBallComponent : MonoBehaviour
     private AimingComponent.SplineData splineData = null;
 
     private float trajectoryTime = 0f;
-    
+
+    private bool isSpecial = false;
+
+    public void SetBallSprite(Sprite ballSprite)
+    {
+        if(ballSprite)
+        {
+            isSpecial = true;
+            ballRenderer.sprite = ballSprite;
+        }
+        
+        gameObject.transform.localScale *= ballSprite ? 1.5f : 0.8f;
+    }
 
     private void Awake()
     {
@@ -75,9 +78,10 @@ public class CannonBallComponent : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         // If hit a game object with EnemyComponent invoke score point event
-        if (other.gameObject.GetComponent<EnemyComponent>())
+        EnemyComponent enemyComponent = other.gameObject.GetComponent<EnemyComponent>();
+        if (enemyComponent)
         {
-            EventManager.ScorePoint(10);
+            EventManager.ScorePoint(enemyComponent.Score, isSpecial);
         }
 
 

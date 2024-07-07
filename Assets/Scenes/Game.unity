@@ -1281,7 +1281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 3370064976983512019, guid: 8915e1b283a57094584c92b21e187bd1, type: 3}
-  defaultImage: {fileID: 21300000, guid: 516158850658e324c85902d8899bba8a, type: 3}
   cannonBallReadySound: {fileID: 8300000, guid: b1fe98f72989bed45a34167bbabe5465, type: 3}
 --- !u!114 &698187894
 MonoBehaviour:
@@ -2952,7 +2951,7 @@ MonoBehaviour:
     of a cannon, return a score of 0. Finally, the explanation should only be one
     sentence and should he humorous. Like a stand-up comedian is making the evaluation.\r\n\r\nYour
     output should look like this:\r\n\"score,explanation\"\r\n\r\nFor example, for
-    input \"Rubber Duck\", a valid answer is\r\n\"6,A rubber duck is quite funny
+    input \"Rubber Duck\", a valid answer is\r\n\"6--A rubber duck is quite funny
     due to its playful nature and the unexpectedness of using it as a cannonball\""
   setNKeepToPrompt: 1
   chatTemplate: mistral chat

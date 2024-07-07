@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CannonBallExplosion_0
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 97
+        width: 128
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e658872540eeba4ebb0af8b07602659
+      internalID: -875459421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_1
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 73
+        width: 182
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5908e3b4caa4145a609286be2264e6
+      internalID: 1544425821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_2
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 70
+        width: 207
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 144d6ab2697f3f645957ee20e4e4988c
+      internalID: 1950886220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_3
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 63
+        width: 224
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8e0da0fb39d4944bfdc3d3d5157bb8
+      internalID: -212427582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_4
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 53
+        width: 246
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a10076c051096a46968b3fbaf957ce3
+      internalID: 2006498297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_5
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 73
+        width: 211
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96da269792e33b04b89338cd31ea7490
+      internalID: -2078070264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_6
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 77
+        width: 191
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6e9a6fd460e7c4eaae514ab7bc1a27
+      internalID: -2056766059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonBallExplosion_7
+      rect:
+        serializedVersion: 2
+        x: 1924
+        y: 117
+        width: 135
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4e172c59aa1caf449401a9ca2990688
+      internalID: 962004117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +287,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CannonBallExplosion_0: -875459421
+      CannonBallExplosion_1: 1544425821
+      CannonBallExplosion_2: 1950886220
+      CannonBallExplosion_3: -212427582
+      CannonBallExplosion_4: 2006498297
+      CannonBallExplosion_5: -2078070264
+      CannonBallExplosion_6: -2056766059
+      CannonBallExplosion_7: 962004117
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -133,18 +133,8 @@ public class NPCManager : MonoBehaviour
     public void ExplosionOfNPC(Transform transform)
     {
         GameObject Explosion_=Instantiate(Explosion, transform.position, Quaternion.identity);
-        StartCoroutine(HandleExplosion(Explosion_));
     }
 
-    private IEnumerator HandleExplosion(GameObject gameObject)
-    {
-       
-        // Wait for another 1 second
-        yield return new WaitForSeconds(2f);
-
-        // Destroy the explosion
-        Destroy(gameObject);
-    }
     // Update is called once per frame
     void Update()
     {

@@ -17,6 +17,8 @@ public class RequestProcessor : MonoBehaviour
 
     public bool isFiring = false;
 
+    private Process PythonServer;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,7 +29,14 @@ public class RequestProcessor : MonoBehaviour
         start.UseShellExecute = false;
         start.RedirectStandardOutput = false;
 
-        Process.Start(start);
+        PythonServer = Process.Start(start);
+    }
+
+    private void OnApplicationQuit()
+    {
+        PythonServer.Kill();
+        PythonServer.Close();
+        PythonServer.Dispose();
     }
 
     public void RequestImage(string prompt)

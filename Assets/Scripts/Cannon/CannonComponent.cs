@@ -21,6 +21,9 @@ public class CannonComponent : MonoBehaviour
     [SerializeField]
     private AudioClip cannonBallReadySound;
 
+    [SerializeField]
+    private GameObject muzzle;
+
     private AudioSource audioSource;
 
     private AimingComponent aimingComponent;
@@ -76,8 +79,12 @@ public class CannonComponent : MonoBehaviour
             return;
         }
 
+        AimingComponent.SplineData data = aimingComponent.getSplineData();
+
+        Instantiate(muzzle, data.startPosition, Quaternion.identity);
+
         animatorComponent.SetTrigger("Fire");
-        CannonBallComponent cannonBall = cannonPrefab.Instantiate(aimingComponent.getSplineData(), ballTexture);
+        CannonBallComponent cannonBall = cannonPrefab.Instantiate(data, ballTexture);
 
         if (ballTexture)
         {

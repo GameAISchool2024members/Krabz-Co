@@ -27,7 +27,7 @@ public class NPCManager : MonoBehaviour
     // Current crabs and rabbits
     private List<GameObject> crabs;
     private List<GameObject> seagulls;
-    public GameObject Explosion;
+
     public static NPCManager Instance;
     // Start is called before the first frame update
     void Start()
@@ -128,11 +128,6 @@ public class NPCManager : MonoBehaviour
             // Move to the next segment in a round-robin fashion
             segmentIndex = (segmentIndex + 1) % xFloorSplits;
         }
-    }
-
-    public void ExplosionOfNPC(Transform transform)
-    {
-        GameObject Explosion_=Instantiate(Explosion, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame

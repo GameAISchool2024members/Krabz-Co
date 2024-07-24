@@ -1283,6 +1283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 3370064976983512019, guid: 8915e1b283a57094584c92b21e187bd1, type: 3}
   cannonBallReadySound: {fileID: 8300000, guid: b1fe98f72989bed45a34167bbabe5465, type: 3}
+  muzzle: {fileID: 3797058845290994142, guid: 9b202d47c6613d2428818c643a0ebdc9, type: 3}
 --- !u!114 &698187894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,15 +1297,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splines:
-  - startPoint: -0.8
+  - startPoint: -1.03
     endPoint: {x: 8, y: -5}
     height: 2.18
     rotation: 15
-  - startPoint: -0.3
+  - startPoint: 0.09
     endPoint: {x: 13.5, y: -5}
     height: 5.6
     rotation: 0
-  - startPoint: 0.25
+  - startPoint: 1.34
     endPoint: {x: 19, y: -5}
     height: 8.6
     rotation: -15
@@ -2863,7 +2864,6 @@ MonoBehaviour:
   floor: {fileID: 1720804771}
   floorStartX: -12
   floorEndX: 12
-  Explosion: {fileID: 3797058845290994142, guid: 4f175efe189a4f345931d8515272029e, type: 3}
 --- !u!114 &1426146487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4365,7 +4365,7 @@ Transform:
   m_GameObject: {fileID: 2090232543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8, z: 0}
+  m_LocalPosition: {x: 0, y: -8.6, z: -0.16}
   m_LocalScale: {x: 1, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -71,7 +71,7 @@ public class CannonBallComponent : MonoBehaviour
     public void DestroyCannonBall()
     {
         Destroy(gameObject);
-        NPCManager.Instance.ExplosionOfNPC(gameObject.transform);
+        Instantiate(Explosion, gameObject.transform.position, Quaternion.identity);
         // Start the coroutine to instantiate the explosion after a delay
     }
    

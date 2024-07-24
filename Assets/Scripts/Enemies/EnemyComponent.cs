@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Animator))]
 public class EnemyComponent : MonoBehaviour
 {
     public int Score

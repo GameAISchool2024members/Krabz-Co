@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AimingComponent))]
+[RequireComponent(typeof(AudioSource))]
 public class CannonComponent : MonoBehaviour
 {
     public bool CanFire
@@ -23,6 +24,8 @@ public class CannonComponent : MonoBehaviour
     private AudioSource audioSource;
 
     private AimingComponent aimingComponent;
+
+    private Animator animatorComponent;
 
     private bool canFire = false;
 
@@ -44,6 +47,7 @@ public class CannonComponent : MonoBehaviour
     private void Start()
     {
         aimingComponent = GetComponent<AimingComponent>();
+        animatorComponent = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -72,6 +76,7 @@ public class CannonComponent : MonoBehaviour
             return;
         }
 
+        animatorComponent.SetTrigger("Fire");
         CannonBallComponent cannonBall = cannonPrefab.Instantiate(aimingComponent.getSplineData(), ballTexture);
 
         if (ballTexture)

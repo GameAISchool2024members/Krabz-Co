@@ -46,6 +46,7 @@ public class GameProgression : MonoBehaviour
     {
         StateLogic();
     }
+
     private void StateLogic()
     {
         switch (GamePhase)

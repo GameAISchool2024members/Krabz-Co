@@ -28,8 +28,13 @@ public class RequestProcessor : MonoBehaviour
         start.Arguments = Application.dataPath + "/Leonardo/server.py --api";
         start.UseShellExecute = false;
         start.RedirectStandardOutput = false;
-
+        
         PythonServer = Process.Start(start);
+
+        if(isFiring)
+        {
+            RequestFire();
+        }
     }
 
     private void OnApplicationQuit()
@@ -52,7 +57,11 @@ public class RequestProcessor : MonoBehaviour
     public void RequestFire()
     {
         isFiring = true;
-        StartCoroutine(GenerateFire());
+
+        if(PythonServer != null)
+        {
+            StartCoroutine(GenerateFire());
+        }
     }
 
     protected IEnumerator GenerateImage(string prompt)

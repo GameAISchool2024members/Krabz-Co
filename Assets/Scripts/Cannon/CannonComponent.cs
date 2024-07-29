@@ -85,10 +85,5 @@ public class CannonComponent : MonoBehaviour
 
         animatorComponent.SetTrigger("Fire");
         CannonBallComponent cannonBall = cannonPrefab.Instantiate(data, ballTexture);
-
-        if (ballTexture)
-        {
-            //ballTexture = null;
-        }
     }
 }
